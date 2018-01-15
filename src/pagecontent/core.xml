@@ -1,0 +1,26 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+  <p>
+    This section defines the "core" profiles that would be expected to be present in most genetic reports, regardless of type.  This includes the representation of different types of variants as well as assertions about haplotypes and genotypes.  
+  </p>
+  Variant
+  Haplotype
+  Genotype
+  Phenotype
+  Sequence
+  Gene
+  Chromosome
+  
+  <a name="overview"> </a>
+  <h2>Overview</h2>
+  <p>
+    The diagnostic report relates to a hierarchy of child observations.  The following diagram provides an overview of the various profiles that make up the diagnostic report and shows how they interrelate.
+  </p>
+  <img src="CG-DiagnosticReport.png" alt="Class diagram showing the component parts of the diagnostic report"/>
+  <p>
+    The various observation profiles are organized in a hierarchical structure with certain shared components, including relationships to patient, specimen and lab.  The following diagram shows the relationship of the profiles.
+  </p>
+  <img src="CG-profile-hierarchy.png" alt="Class diagram showing the specialization structure of the observation classes as well as all relationships to Patient, Specimen and Organization."/>
+  
+  Specific design decisions
+  - will not use codes that pre-coordinate the question to be asked  
+</div>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Lloyd McKenzie (private) -->
+<ImplementationGuide xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../src-generated/schemas/fhir-single.xsd">
+  <id value="cg"/>
+  <url value="http://hl7.org/fhir/uv/cg/ImplementationGuide/cg"/>
+  <name value="Clinical Genomics - Unified Proposal"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <publisher value="HL7 International Clinical Genomics Work Group"/>
+  <description value="A new proposed approach for representing genomic reports making use of Observation components rather than extensions"/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+    </coding>
+  </jurisdiction>
+  <fhirVersion value="3.2.0"/>
+  <package>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="diagnosticreport-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="medicationstatement-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="observation-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="sequence-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="servicerequest-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="task-profile-spreadsheet.xml"/>
+    </extension>
+    <name value="General Profiles"/>
+    <description value="General constraints on FHIR resources to be adhered to as part of the CG implementation guide that apply regardless of what area(s) of genomics are of interest"/>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Base observation common properties"/>
+      <description value="Base profile that defines characteristics shared by all genetic observations"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-base"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genetic Assertion"/>
+      <description value="Properties that are consistent across genotypes, haplotypes, and all types of variants"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-gen-assert"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Variation Common Properties"/>
+      <description value="Properties that are consistent across all types of variant where details are captured rather than just a single high-level code"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-described-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="CG Diagnostic Report"/>
+      <description value="Defines the overall genetic report"/>
+      <sourceReference>
+        <reference value="StructureDefinition/diagnosticreport"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Order for Genetics Test"/>
+      <description value="The lab order or request that triggered the execution of the genetics test"/>
+      <sourceReference>
+        <reference value="StructureDefinition/servicerequest"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genetic analysis overall interpretation"/>
+      <description value="Provides a coarse overall interpretation of the genetic results reported."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-overall"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Deletion-duplication overall interpretation"/>
+      <description value="Provides an overall interpretation of whether any deletions or duplications were found as part of the genetic analysis"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-deletion-dup"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Inheritable Disease Pathology"/>
+      <description value="Provides an indication of whether there's a pathologic risk associated with a particular genotype, haplotype, variant or combination there-of, and if so, what the associated pathology is."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-inh-dis-path"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Discrete variation"/>
+      <description value="Details about a contiguous set of changes in the tested sample compared to a reference sequence."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-discrete-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Structural variation"/>
+      <description value="Details about a large contiguous set of changes in the tested sample compared to a reference sequence."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-structural-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Complex variation"/>
+      <description value="A variant consisting of multiple independent consecutive variations"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-complex-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Single-coded variation (ISCN)"/>
+      <description value="Fully describes a variant with a single code.  Typically a large variant such as a mosaic, abnormal chromosome numbers, etc."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-high-level-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genotype"/>
+      <description value="Assertion of a particular haplotype on the basis of one or more variants"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-haplotype"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genotype"/>
+      <description value="Assertion of a particular genotype on the basis of one or more variants or haplotypes"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-genotype"/>
+      </sourceReference>
+    </resource>
+  </package>
+  <package>
+    <name value="Somatics"/>
+    <description value="Profiles related to the reporting of somatic genetic issues"/>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Somatic Pathology"/>
+      <description value="Assertion of whether a particular somatic genotype/haplotype/variation or combination-thereof carries a pathological risk, and if so, for what"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-som-path"/>
+      </sourceReference>
+    </resource>
+  </package>
+  <package>
+    <name value="Pharmacogenomics"/>
+    <description value="Profiles for reports relating to genetic impact on medication use and effectiveness"/>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genetic Medication Impact"/>
+      <description value="Abstract profile with common properties for observations that convey the potential impact of a genetic characteristics on a medication"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-med-impact"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genotype medication metabolism impact"/>
+      <description value="Assertion of the expected impact of a particular genotype on the ability of the subject to metabolize medications"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-metabolism"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genotype medication efficacy impact"/>
+      <description value="Assertion of the expected impact of a particular genotype on the efficacy of medications for the subject"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-efficacy"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="High Risk Allele"/>
+      <description value="Assertion of whether the patient has a high-risk allele"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-high-risk"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Medication Adjustment Proposal"/>
+      <description value="Task describing what sort of change (if any) should be made in a patient's medication based on an identified genotype"/>
+      <sourceReference>
+        <reference value="StructureDefinition/task-med-chg"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Current Medication"/>
+      <description value="MedicationStatement describing a med potentially being taken by the patient that may require adjustment"/>
+      <sourceReference>
+        <reference value="StructureDefinition/medicationstatement"/>
+      </sourceReference>
+    </resource>
+  </package>
+  <package>
+    <name value="Extensions"/>
+    <description value="Extensions defined as part of the CG implementation guide"/>
+    <resource>
+      <example value="false"/>
+      <name value="Recommended action"/>
+      <description value="References a proposed action that is recommended based on the results of the observation."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-recommendedAction"/>
+      </sourceReference>
+    </resource>
+  </package>
+  <package>
+    <name value="Example(s)"/>
+    <description value="Example(s) showing the use of the CG profiles"/>
+    <resource>
+      <example value="true"/>
+      <name value="CG Test"/>
+      <description value="Test instance showing data from the CG v2 spec"/>
+      <sourceReference>
+        <reference value="Bundle/diagnosticreport-cgexample"/>
+      </sourceReference>
+      <exampleFor>
+        <reference value="StructureDefinition/diagnosticreport"/>
+      </exampleFor>
+    </resource>
+  </package>
+  <page>
+    <source value="toc.html"/>
+    <title value="Table of Contents"/>
+    <kind value="page"/>
+    <page>
+      <source value="index.html"/>
+      <title value="CG IG Home Page"/>
+      <kind value="page"/>
+      <page>
+        <source value="background.html"/>
+        <title value="Genomics Primer"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="core.html"/>
+        <title value="Core profiles"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="pharmacogenomics.html"/>
+        <title value="Pharmacogenomic profiles"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="somatic.html"/>
+        <title value="Somatic profiles"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="hla.html"/>
+        <title value="HLA Typing profiles"/>
+        <kind value="page"/>
+      </page>
+    </page>
+    <page>
+      <source value="artifacts.html"/>
+      <title value="Artifact List"/>
+      <kind value="page"/>
+    </page>
+  </page>
+</ImplementationGuide>

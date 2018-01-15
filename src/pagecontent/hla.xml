@@ -1,0 +1,12 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+  <p>
+    This section defines the "core" profiles that would be expected to be present in most genetic reports, regardless of type.  This includes the representation of different types of variants as well as assertions about haplotypes and genotypes.  
+  </p>
+  Variant
+  Haplotype
+  Genotype
+  Phenotype
+  Sequence
+  Gene
+  Chromosome
+</div>
