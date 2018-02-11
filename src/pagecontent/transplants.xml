@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+  <p>
+    This section covers additional guidelines related to genetic assessments related to the matching of donor and recipient tissue for donation, including bone marrow, organ and other tissue donations.  In particular, it covers additional guidance related to reports dealing with HLA (Human Leukocyte Antigens) typing.
+  </p>
+  <a name="interpretations"> </a>
+  <h2>Transplant-specific Genetic Interpretations</h2>
+  <p>
+    TODO
+  </p>
+  <a name="impacts"> </a>
+  <h2>Transplant-specific Genetic Impacts</h2>
+  <p>
+    TODO
+  </p>
+  <a name="computable"> </a>
+  <h2>Transplant-specific Computable Genetic Findings</h2>
+  <p>
+    TODO
+  </p>
+  <a name="non-computable"> </a>
+  <h2>Transplant-specific Non-Computable Genetic Findings</h2>
+  <p>
+    TODO
+  </p>
+  <a name="additional"> </a>
+  <h2>Transplant-specific Guidance and Recommendations</h2>
+  <p>
+    TODO
+  </p>
+</div>

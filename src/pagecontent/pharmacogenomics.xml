@@ -1,12 +1,30 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
   <p>
-    This section defines the "core" profiles that would be expected to be present in most genetic reports, regardless of type.  This includes the representation of different types of variants as well as assertions about haplotypes and genotypes.  
+    This section provides guidance for genomic reporting about the impact of a patient's or tumor's genetics on the behavior of one or more medications.  This includes making recommendations for medication adjustments.
   </p>
-  Variant
-  Haplotype
-  Genotype
-  Phenotype
-  Sequence
-  Gene
-  Chromosome
+  <a name="interpretations"> </a>
+  <h2>Pharmacogenomic-specific Genetic Interpretations</h2>
+  <p>
+    TODO
+  </p>
+  <a name="impacts"> </a>
+  <h2>Pharmacogenomic-specific Genetic Impacts</h2>
+  <p>
+    TODO
+  </p>
+  <a name="computable"> </a>
+  <h2>Pharmacogenomic-specific Computable Genetic Findings</h2>
+  <p>
+    TODO
+  </p>
+  <a name="non-computable"> </a>
+  <h2>Pharmacogenomic-specific Non-Computable Genetic Findings</h2>
+  <p>
+    TODO
+  </p>
+  <a name="additional"> </a>
+  <h2>Pharmacogenomic-specific Guidance and Recommendations</h2>
+  <p>
+    TODO
+  </p>
 </div>

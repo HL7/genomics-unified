@@ -90,41 +90,50 @@
   "canonicalBase": "http://hl7.org/fhir/uv/cg",
   "source": "cg.xml",
   "spreadsheets": [
+    "device-profile-spreadsheet.xml",
+    "devicecomponent-profile-spreadsheet.xml",
     "diagnosticreport-profile-spreadsheet.xml",
     "medicationstatement-profile-spreadsheet.xml",
     "observation-profile-spreadsheet.xml",
     "sequence-profile-spreadsheet.xml",
     "servicerequest-profile-spreadsheet.xml",
+    "specimen-profile-spreadsheet.xml",
     "task-profile-spreadsheet.xml"
   ],
   "resources": {
     "StructureDefinition/obs-base":{
     },
-    "StructureDefinition/obs-gen-assert":{
-    },
-    "StructureDefinition/obs-described-variant":{
-    },
     "StructureDefinition/diagnosticreport":{
     },
+    "StructureDefinition/specimen":{
+    },
+    "StructureDefinition/task-rec-followup":{
+    },
     "StructureDefinition/servicerequest":{
+    },
+    "StructureDefinition/obs-gen-panel":{
     },
     "StructureDefinition/obs-overall":{
     },
     "StructureDefinition/obs-deletion-dup":{
     },
+    "StructureDefinition/obs-chrom-overall":{
+    },
     "StructureDefinition/obs-inh-dis-path":{
     },
-    "StructureDefinition/obs-discrete-variant":{
+    "StructureDefinition/obs-desc-gen-finding":{
     },
-    "StructureDefinition/obs-structural-variant":{
-    },
-    "StructureDefinition/obs-complex-variant":{
-    },
-    "StructureDefinition/obs-high-level-variant":{
+    "StructureDefinition/obs-comp-gen-finding":{
     },
     "StructureDefinition/obs-haplotype":{
     },
     "StructureDefinition/obs-genotype":{
+    },
+    "StructureDefinition/obs-cytogenic-not":{
+    },
+    "StructureDefinition/obs-complex-variant":{
+    },
+    "StructureDefinition/obs-described-variant":{
     },
     "StructureDefinition/obs-som-path":{
     },
@@ -140,7 +149,21 @@
     },
     "StructureDefinition/medicationstatement":{
     },
+    "StructureDefinition/obs-chrom-g-band":{
+    },
+    "StructureDefinition/obs-chrom-fish":{
+    },
+    "StructureDefinition/obs-copy-num-chg":{
+    },
+    "StructureDefinition/device-micro-plat":{
+    },
+    "StructureDefinition/devicecomp-fish-probe":{
+    },
     "StructureDefinition/obs-recommendedAction":{
+    },
+    "StructureDefinition/dr-recommendedAction":{
+    },
+    "StructureDefinition/device-comp-manufacturer":{
     },
     "Bundle/diagnosticreport-cgexample":{
     }

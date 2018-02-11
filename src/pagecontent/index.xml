@@ -1,7 +1,7 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
   <blockquote class="stu-note">
     <p>
-    This is a proof-of-concept implementation guide that combines ideas from the <a href="http://harvardone.shareted.com/observation-genetic.html">Harvard (Tangram) proposal</a> and the <a href="http://build.fhir.org/ig/HL7/genomics2/index.html">NLM (genomics2) proposal</a> and incorporates additional feedback from the Clinical Genomics work group.  It is not yet endorsed as an "official" specification.  After feedback from implementation and connectathon, the content may be migrated to become the official specification.
+      This implementation guide is not fully complete.  Portions of the implementation guide are provided for "framework purposes only" - giving a sense of what additional topics are intended to be covered and where that content will fit.  The work group has prioritized standardizing those portions of the specification with general applicability and related to sequencing.  The work group will continue to flesh out additional sections for future ballot publications.
     </p>
   </blockquote>
   <a name="scope"> </a>
@@ -13,6 +13,7 @@
     This guide covers all aspects of genetic reporting, including:
   </p>
   <ul>
+    <li>Human and veterinary as well as bacterial and viral specimens</li>
     <li>Representation of simple discrete variants, structural variants including copy number variants, complex variants as well as gross variations such as extra or missing chromosomes</li>
     <li>Representation of both known/catalogued variants as well as fully describing non-catalogued variations</li>
     <li>Germline and somatic variations</li>
@@ -22,7 +23,7 @@
     <li>Mitochondrial DNA variations</li>
   </ul>
   <p>
-    At present, this implementation guide focuses solely on data structures - what data should be/might be present and how it should be organized.  It does not address workflows around how reports are requested, created, approved, routed, delivered, amended, etc.  The implementation guide is also paradigm-independent.  The data structures presented here could be used in RESTful, messaging, documents or other mechanisms.
+    At present, this implementation guide focuses solely on data structures - what data should be/might be present and how it should be organized.  It does not address workflows around how reports are requested, created, approved, routed, delivered, amended, etc.  The implementation guide is also paradigm-independent -  the data structures presented here could be used in RESTful, messaging, documents or other mechanisms.
   </p>
   <a name="principles"> </a>
   <h2>Guiding principles</h2>
@@ -30,12 +31,14 @@
     This guide adheres to a set of design approches:  
   </p>
   <ul>
+    <li>It is intended to be international in scope and only leverages terminologies which are freely available to all countries.</li>
+    <li>It avoids pre-coordinating the type of variant, medication or other information into the Observation.code as this makes it easier to leverage industry standard terminologies for genetic information (e.g. HGVS) and avoids needing to duplicate this information into observation coding systems such as LOINC.</li>
     <li>It maximizes the use of resources that are in common use by laboratory reporting systems for other clinical areas - specifically <a href="{{site.data.fhir.path}}/observation.html">Observation</a> and <a href="{{site.data.fhir.path}}/diagnosticreport.html">DiagnosticReport</a>.  This eases implementation and also reduces the chance of data being lost by systems that might not have been designed to specifically accomodate genetic-related information.</li>
     <li>It minimizes the use of FHIR extensions, also with an objective of reducing the risk of data loss when information is passed to systems that might not explicitly support this implementation guide</li>
     <li>It uses separate observations for each independently useful assertion.  This maximizes the discoverability and queriability of the data.</li>
     <li>It tries to ensure that data is captured in a manner that's consistent regardless of the type of testing that was done to ensure data can be consistently queried even if captured differently (e.g. variations identified in assay tests are reported in the same manner as those identified through direct sequencing)</li>
-    <li>The guide allows for variability in the amount of discrete information captured.  Systems are encouraged to populate what discrete elements they can, with the ability to populate additional elements as the technical capability and/or time and other resources allows.</li>
-    <li>Where possible the guide aligns with HL7's <a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=23">v2 Genetic Variation Model Implementation Guide</a> to maximize consistency for those FHIR systems converting from or otherwise interoperating with v2 systems.</li>
+    <li>The guide allows for variability in the amount of discrete information captured.  Systems are encouraged to populate what discrete elements they can and allows for the possibility of systems populating additional elements as their technical capability and/or time and other resources allow.</li>
+    <li>Where possible the guide aligns with HL7's <a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=23">v2 Genetic Variation Model Implementation Guide</a> and <a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=364">v2 Cytogenetic Model Implementation Guide</a> to maximize consistency for those FHIR systems converting from or otherwise interoperating with v2 systems.  (Note that there are some variations driven by the the differeing approach between FHIR and HL7 v2 as well as additional requirements analysis going into the FHIR implementation guide.)</li>
   </ul>
   <p>
     Together, these principles should make adoption easier and allow systems to more easily adapt in a compatible way as genetic reporting continues to evolve.
@@ -87,29 +90,41 @@
     The remaining sections provide support for more specialized types of reporting.  They are optional.  If your system is involved with genetic reports in a particular area, then read through that section of the implementation guide.  However, there's no reason to read through sections that deal with reporting your system does not use.
   </p>
   <p>
-    The following table provides a list of the main sections in this guide and provides a summary of the content found in each:
+    The following table provides a list of the main sections in this guide and a summary of the content found in each:
   </p>
   <table>
     <tbody>
       <tr>
-        <th>Background</th>
-        <td>Background on genomic concepts represented within this guide.  It's essential reading for those who may not have a deep knowledge of genetics, but it's recommended for all implementers as it makes provides definitions for terms as they are used in this implementation guide.</td>
+        <th><a href="background.html">Background</a></th>
+        <td>Background on genomic concepts represented within this guide.  It's essential reading for those who may not have a deep knowledge of genetics, but it's recommended for all implementers as it provides definitions for terms as they are used in this implementation guide.  Not all terms necessarily have widely expected definitions, so this IG's use of a term may differ from the meaning you may be used to.</td>
       </tr>
       <tr>
-        <th>General Genomic Reporting</th>
+        <th><a href="general.html">General Genomic Reporting</a></th>
         <td>Guidance and examples for the general structure of genomic reports, how to report overall interpretations and how to report genotypes, haplotypes and different types of variants.  This content will be leveraged by all genomic reporting implementations.</td>
       </tr>
       <tr>
-        <th>Pharmacogenomics</th>
+        <th><a href="sequencing.html">Sequenced variants</a></th>
+        <td>Guidance on expressing information about variants gleaned from various sequencing approaches including direct sequencing, shotgun sequencing, array-based testing, etc.</td>
+      </tr>
+      <tr>
+        <th><a href="cytogenomics.html">Cytogenomic Reporting</a></th>
+        <td>Guidance on expressing information gathered by [[cytogenomic]] testing techniques including FISH tests, chromosomal analysis, etc.</td>
+      </tr>
+      <tr>
+        <th><a href="pharmacogenomics.html">Pharmacogenomic Reporting</a></th>
         <td>Additional guidance and examples related to genetic testing done for the purpose of assessing genetic variations' impact on the use of medications - both for oncology and for general patient treatment</td>
       </tr>
       <tr>
-        <th>Somatic</th>
-        <td>Additional guidance related to genetic testing done on somatic (non-germline) tissues, including assessments of potentially cancerous tissues</td>
+        <th><a href="somatics.html">Somatic Genomic Reporting</a></th>
+        <td>Additional guidance related to genetic testing done on somatic (non-germline) tissues, including assessments of tumors</td>
       </tr>
       <tr>
-        <th>Transplants</th>
+        <th><a href="transplants.html">Genomic Profiling for Transplantation</a></th>
         <td>Additional guidance related to genetic testing done for transplant match assessments, including HLA typing</td>
+      </tr>
+      <tr>
+        <th><a href="v2.html">Appendix A: Relation to v2 reporting</a></th>
+        <td>Guidance on how the guidance in this implementation guide aligns with reports expressed using HL7 v2 and advice on how to convert between the v2 and FHIR representations</td>
       </tr>
     </tbody>
   </table>
@@ -118,6 +133,8 @@
       Are there other reporting areas we should also cover?
     </p>
   </blockquote>
+
+  <a name="credits"> </a>
   <h2>Credits</h2>
   <p>
     [Work group to decide what they'd like here]

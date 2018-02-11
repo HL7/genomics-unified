@@ -17,6 +17,12 @@
   <fhirVersion value="3.2.0"/>
   <package>
     <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="device-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="devicecomponent-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
       <valueUri value="diagnosticreport-profile-spreadsheet.xml"/>
     </extension>
     <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
@@ -30,6 +36,9 @@
     </extension>
     <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
       <valueUri value="servicerequest-profile-spreadsheet.xml"/>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
+      <valueUri value="specimen-profile-spreadsheet.xml"/>
     </extension>
     <extension url="http://hl7.org/fhir/tools-profile-spreadsheet">
       <valueUri value="task-profile-spreadsheet.xml"/>
@@ -52,28 +61,6 @@
         <valueBoolean value="true"/>
       </extension>
       <example value="false"/>
-      <name value="Genetic Assertion"/>
-      <description value="Properties that are consistent across genotypes, haplotypes, and all types of variants"/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-gen-assert"/>
-      </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
-      <name value="Variation Common Properties"/>
-      <description value="Properties that are consistent across all types of variant where details are captured rather than just a single high-level code"/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-described-variant"/>
-      </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
       <name value="CG Diagnostic Report"/>
       <description value="Defines the overall genetic report"/>
       <sourceReference>
@@ -85,10 +72,43 @@
         <valueBoolean value="true"/>
       </extension>
       <example value="false"/>
+      <name value="CG Specimen"/>
+      <description value="Constraints on Specimen for use with clinical genomics reporting"/>
+      <sourceReference>
+        <reference value="StructureDefinition/specimen"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Recomended Followup"/>
+      <description value="Task describing the followup that is recommended"/>
+      <sourceReference>
+        <reference value="StructureDefinition/task-rec-followup"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
       <name value="Order for Genetics Test"/>
       <description value="The lab order or request that triggered the execution of the genetics test"/>
       <sourceReference>
         <reference value="StructureDefinition/servicerequest"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genetic Panel"/>
+      <description value="Organizes information within a genetic report"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-gen-panel"/>
       </sourceReference>
     </resource>
     <resource>
@@ -118,6 +138,17 @@
         <valueBoolean value="true"/>
       </extension>
       <example value="false"/>
+      <name value="Chromosome analysis overall interpretation"/>
+      <description value="Provides a coarse overall interpretation of the chromosomal analysis results reported."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-chrom-overall"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
       <name value="Inheritable Disease Pathology"/>
       <description value="Provides an indication of whether there's a pathologic risk associated with a particular genotype, haplotype, variant or combination there-of, and if so, what the associated pathology is."/>
       <sourceReference>
@@ -125,6 +156,83 @@
       </sourceReference>
     </resource>
     <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Descriptive Genetic Finding"/>
+      <description value="Properties common to genetic findings whose results are expressed as narrative"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-desc-gen-finding"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Computable Genetic Finding"/>
+      <description value="Properties common to genetic findings whose results are expressed as computable discrete elements (e.g. genotypes, haplotypes, variants, etc.)"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-comp-gen-finding"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Haplotype"/>
+      <description value="Assertion of a particular haplotype on the basis of one or more variants"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-haplotype"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Genotype"/>
+      <description value="Assertion of a particular genotype on the basis of one or more variants or haplotypes"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-genotype"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Cytogenic Notation"/>
+      <description value="Fully describes a variant with a single code.  Typically a large variant such as a mosaic, abnormal chromosome numbers, etc."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-cytogenic-not"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Complex Variatiant"/>
+      <description value="A variant consisting of multiple independent consecutive variations"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-complex-variant"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Described Variant (Discrete or Structural)"/>
+      <description value="Details about a  set of changes in the tested sample compared to a reference sequence."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-described-variant"/>
+      </sourceReference>
+    </resource>
+<!--    <resource>
       <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
         <valueBoolean value="true"/>
       </extension>
@@ -145,51 +253,7 @@
       <sourceReference>
         <reference value="StructureDefinition/obs-structural-variant"/>
       </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
-      <name value="Complex variation"/>
-      <description value="A variant consisting of multiple independent consecutive variations"/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-complex-variant"/>
-      </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
-      <name value="Single-coded variation (ISCN)"/>
-      <description value="Fully describes a variant with a single code.  Typically a large variant such as a mosaic, abnormal chromosome numbers, etc."/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-high-level-variant"/>
-      </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
-      <name value="Genotype"/>
-      <description value="Assertion of a particular haplotype on the basis of one or more variants"/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-haplotype"/>
-      </sourceReference>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
-        <valueBoolean value="true"/>
-      </extension>
-      <example value="false"/>
-      <name value="Genotype"/>
-      <description value="Assertion of a particular genotype on the basis of one or more variants or haplotypes"/>
-      <sourceReference>
-        <reference value="StructureDefinition/obs-genotype"/>
-      </sourceReference>
-    </resource>
+    </resource>-->
   </package>
   <package>
     <name value="Somatics"/>
@@ -277,6 +341,65 @@
     </resource>
   </package>
   <package>
+    <name value="Cytogenomics"/>
+    <description value="Profiles for reporting cytogenic results"/>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Chromosome analysis G-banding panel"/>
+      <description value="Chromosome analysis that uses traditional banding technique."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-chrom-g-band"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Chromosome Analysis FISH panel"/>
+      <description value="Fluorescence in situ hybridization test results"/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-chrom-fish"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Chromosome copy number change panel"/>
+      <description value="Details about the copy number pair, such as the base pair start and end coordinates of where the change occurred."/>
+      <sourceReference>
+        <reference value="StructureDefinition/obs-copy-num-chg"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="Device Micro-array Platform"/>
+      <description value="Information about a micro-array platform used as part of copy number change testing"/>
+      <sourceReference>
+        <reference value="StructureDefinition/device-micro-plat"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-spreadsheet-profile">
+        <valueBoolean value="true"/>
+      </extension>
+      <example value="false"/>
+      <name value="DeviceComponent Fish Probe"/>
+      <description value="Information about the probe used in a FISH test"/>
+      <sourceReference>
+        <reference value="StructureDefinition/devicecomp-fish-probe"/>
+      </sourceReference>
+    </resource>
+  </package>
+  <package>
     <name value="Extensions"/>
     <description value="Extensions defined as part of the CG implementation guide"/>
     <resource>
@@ -285,6 +408,22 @@
       <description value="References a proposed action that is recommended based on the results of the observation."/>
       <sourceReference>
         <reference value="StructureDefinition/obs-recommendedAction"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <example value="false"/>
+      <name value="Recommended action"/>
+      <description value="References a proposed action that is recommended based on the results of the diagnostic report"/>
+      <sourceReference>
+        <reference value="StructureDefinition/dr-recommendedAction"/>
+      </sourceReference>
+    </resource>
+    <resource>
+      <example value="false"/>
+      <name value="Manufacturer"/>
+      <description value="Indicates the manufacturer for a particular component"/>
+      <sourceReference>
+        <reference value="StructureDefinition/device-comp-manufacturer"/>
       </sourceReference>
     </resource>
   </package>
@@ -317,23 +456,38 @@
         <kind value="page"/>
       </page>
       <page>
-        <source value="core.html"/>
-        <title value="Core profiles"/>
+        <source value="general.html"/>
+        <title value="General Genomic Reporting"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="sequencing.html"/>
+        <title value="Sequenced Variants"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="cytogenomics.html"/>
+        <title value="Cytogenomic Reporting"/>
         <kind value="page"/>
       </page>
       <page>
         <source value="pharmacogenomics.html"/>
-        <title value="Pharmacogenomic profiles"/>
+        <title value="Pharmacogenomic Reporting"/>
         <kind value="page"/>
       </page>
       <page>
-        <source value="somatic.html"/>
-        <title value="Somatic profiles"/>
+        <source value="somatics.html"/>
+        <title value="Somatic Genomic Reporting"/>
         <kind value="page"/>
       </page>
       <page>
-        <source value="hla.html"/>
-        <title value="HLA Typing profiles"/>
+        <source value="transplants.html"/>
+        <title value="Genomic Profiling for Transplantation"/>
+        <kind value="page"/>
+      </page>
+      <page>
+        <source value="v2.html"/>
+        <title value="Appendix A: Relation to v2 reporting"/>
         <kind value="page"/>
       </page>
     </page>

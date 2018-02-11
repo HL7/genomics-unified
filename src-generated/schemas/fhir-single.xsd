@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Mon, Jan 15, 2018 03:59+0000 for FHIR v3.2.0 
+  Generated on Sat, Feb 10, 2018 21:05+0000 for FHIR v3.2.0 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://hl7.org/fhir" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" version="3.2.0">
   <!-- Note: When using this schema with some tools, it may also be necessary to declare xmlns:xml="http://www.w3.org/XML/1998/namespace", however this causes performance issues with other tools and thus is not in the base schemas. -->
@@ -5616,9 +5616,14 @@ A coverage may only be resposible for specific types of charges, and the sequenc
               <xs:documentation xml:lang="en">This element defines the specific type of event that occurred or that was prevented from occurring.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="subject" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="subject" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">This subject or group impacted by the event.  With a prospective adverse event, there will be no subject as the adverse event was prevented.</xs:documentation>
+              <xs:documentation xml:lang="en">This subject or group impacted by the event.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="context" minOccurs="0" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The encounter or episode of care that establishes the context for this AdverseEvent.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="date" minOccurs="0" maxOccurs="1" type="dateTime">
@@ -5656,14 +5661,9 @@ A coverage may only be resposible for specific types of charges, and the sequenc
               <xs:documentation xml:lang="en">Information on who recorded the adverse event.  May be the patient or a practitioner.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="eventParticipant" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="contributor" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Parties that may or should contribute or have contributed information to the Act. Such information includes information leading to the decision to perform the Act and how to perform the Act (e.g. consultant), information that the Act itself seeks to reveal (e.g. informant of clinical history), or information about what Act was performed (e.g. informant witness).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="description" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Describes the adverse event in text.</xs:documentation>
+              <xs:documentation xml:lang="en">Parties that may or should contribute or have contributed information to the adverse event, which can consist of one or more activities.  Such information includes information leading to the decision to perform the activity and how to perform the activity (e.g. consultant), information that the activity itself seeks to reveal (e.g. informant of clinical history), or information about what activity was performed (e.g. informant witness).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="suspectEntity" type="AdverseEvent.SuspectEntity" minOccurs="0" maxOccurs="unbounded">
@@ -5818,6 +5818,11 @@ A coverage may only be resposible for specific types of charges, and the sequenc
           <xs:element name="patient" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The patient who has the allergy or intolerance.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="encounter" minOccurs="0" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The encounter when the allergy or intolerance was asserted.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:choice minOccurs="0" maxOccurs="1" >
@@ -10764,13 +10769,16 @@ into another (possibly the same) biological entity.</xs:documentation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:choice minOccurs="1" maxOccurs="1" >
+          <xs:element name="itemCodeableConcept" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions.</xs:documentation>
-            </xs:annotation>
-            <xs:element name="itemCodeableConcept" type="CodeableConcept"/>
-            <xs:element name="itemReference" type="Reference"/>
-          </xs:choice>
+              <xs:documentation xml:lang="en">Specific text or code for finding or diagnosis, which may include ruled-out or resolved conditions.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="itemReference" minOccurs="0" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Specific reference for finding or diagnosis, which may include ruled-out or resolved conditions.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="basis" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">Which investigations support finding or diagnosis.</xs:documentation>
@@ -11877,12 +11885,12 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:element name="Composition" type="Composition">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="Composition">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -11969,7 +11977,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Attester">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -11995,7 +12003,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.RelatesTo">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -12018,7 +12026,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Event">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -12044,7 +12052,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Section">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained.</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -21301,14 +21309,9 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The version of the FHIR specification on which this ImplementationGuide is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 3.2.0 for this version.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="dependency" type="ImplementationGuideInput.Dependency" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="dependsOn" type="ImplementationGuideInput.DependsOn" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="package" type="ImplementationGuideInput.Package" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A logical group of resources. Logical groups can be used when building pages.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="global" type="ImplementationGuideInput.Global" minOccurs="0" maxOccurs="unbounded">
@@ -21316,30 +21319,87 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">A set of profiles that all resources covered by this implementation guide must conform to.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="page" type="ImplementationGuideInput.Page" minOccurs="0" maxOccurs="1">
+          <xs:element name="definition" type="ImplementationGuideInput.Definition" minOccurs="0" maxOccurs="1">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A page / section in the implementation guide. The root page is the implementation guide home page.</xs:documentation>
+              <xs:documentation xml:lang="en">Information used when generating the IG.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="ImplementationGuideInput.Dependency">
+  <xs:complexType name="ImplementationGuideInput.DependsOn">
     <xs:annotation>
       <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="type" minOccurs="1" maxOccurs="1" type="GuideDependencyType">
+          <xs:element name="definition" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">How the dependency is represented when the guide is published.</xs:documentation>
+              <xs:documentation xml:lang="en">The canonical reference of the definition of the IG that is depended on.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="uri" minOccurs="1" maxOccurs="1" type="uri">
+          <xs:element name="version" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Where the dependency is located.</xs:documentation>
+              <xs:documentation xml:lang="en">Version of IG.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImplementationGuideInput.Global">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="type" minOccurs="1" maxOccurs="1" type="ResourceType">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The type of resource that all instances must conform to.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="profile" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A reference to the profile that all instances must conform to.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImplementationGuideInput.Definition">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="package" type="ImplementationGuideInput.Package" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A logical group of resources. Logical groups can be used when building pages.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="resource" type="ImplementationGuideInput.Resource" minOccurs="1" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="page" type="ImplementationGuideInput.Page" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A page / section in the implementation guide. The root page is the implementation guide home page.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="parameter" type="ImplementationGuideInput.Parameter" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Defines how IG is built by tools.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="template" type="ImplementationGuideInput.Template" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A template for building resources.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -21361,11 +21421,6 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           <xs:element name="description" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">Human readable text describing the package.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="resource" type="ImplementationGuideInput.Resource" minOccurs="1" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -21401,25 +21456,9 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
             <xs:element name="exampleBoolean" type="boolean"/>
             <xs:element name="exampleReference" type="Reference"/>
           </xs:choice>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="ImplementationGuideInput.Global">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="type" minOccurs="1" maxOccurs="1" type="ResourceType">
+          <xs:element name="package" minOccurs="0" maxOccurs="1" type="id">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The type of resource that all instances must conform to.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="profile" minOccurs="1" maxOccurs="1" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A reference to the profile that all instances must conform to.</xs:documentation>
+              <xs:documentation xml:lang="en">Reference to the id of the pack this resource appears in.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -21437,32 +21476,12 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
             <xs:annotation>
               <xs:documentation xml:lang="en">The source address for the page.</xs:documentation>
             </xs:annotation>
-            <xs:element name="sourceUri" type="uri"/>
-            <xs:element name="sourceReference" type="Reference"/>
+            <xs:element name="nameUri" type="uri"/>
+            <xs:element name="nameReference" type="Reference"/>
           </xs:choice>
           <xs:element name="title" minOccurs="1" maxOccurs="1" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">A short title used to represent this page in navigational structures such as table of contents, bread crumbs, etc.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="kind" minOccurs="1" maxOccurs="1" type="GuidePageKind">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The kind of page that this is. Some pages are autogenerated (list, example), and other kinds are of interest so that tools can navigate the user to the page of interest.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="type" minOccurs="0" maxOccurs="unbounded" type="ResourceType">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">For constructed pages, what kind of resources to include in the list.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="package" minOccurs="0" maxOccurs="unbounded" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">For constructed pages, a list of packages to include in the page (or else empty for everything).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="format" minOccurs="0" maxOccurs="1" type="code">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The format of the page.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="page" type="ImplementationGuideInput.Page" minOccurs="0" maxOccurs="unbounded">
@@ -21471,6 +21490,123 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
            </xs:annotation>
           </xs:element>
         </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImplementationGuideInput.Parameter">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="1" type="GuideParameterCode">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">apply-business-version | apply-jurisdiction | path-resource | path-pages | path-tx-cache | expansion-profile | rule-broken-links | generate-xml | generate-json | generate-turtle | html-template.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="value" minOccurs="1" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Value for named type.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImplementationGuideInput.Template">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="1" type="code">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Type of template specified.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="source" minOccurs="1" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The source of the template.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="scope" minOccurs="0" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The scope in which the template applies.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="GuideParameterCode-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="apply-business-version">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Apply Business Version</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="apply-jurisdiction">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Apply Jurisdiction</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="path-resource">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Resource Path</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="path-pages">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Pages Path</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="path-tx-cache">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Terminology Cache Path</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="expansion-profile">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Expansion Profile</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rule-broken-links">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Broken Links Rule</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="generate-xml">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Generate XML</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="generate-json">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Generate JSON</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="generate-turtle">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Generate Turtle</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="html-template">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">HTML Template</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GuideParameterCode">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Code of parameter that is input to the guide</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="GuideParameterCode-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -21552,7 +21688,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The version of the FHIR specification on which this ImplementationGuide is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 3.2.0 for this version.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="dependency" type="ImplementationGuideOutput.Dependency" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="dependsOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.</xs:documentation>
            </xs:annotation>
@@ -21585,27 +21721,6 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           <xs:element name="other" minOccurs="0" maxOccurs="unbounded" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates the relative path of an additional non-page, non-image file that is part of the IG - e.g. zip, jar and similar files that could be the target of a hyperlink in a derived IG.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="ImplementationGuideOutput.Dependency">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="type" minOccurs="1" maxOccurs="1" type="GuideDependencyType">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">How the dependency is represented when the guide is published.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="uri" minOccurs="1" maxOccurs="1" type="uri">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where the dependency is located.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -23470,6 +23585,11 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">When this specific batch of product will expire.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="serialNumber" minOccurs="0" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An identifier assigned to a drug at the point of manufacturing and repackaging (at the package or pallet level), sufficenti to facilitate the identification, validatation, authentication and tracking and tracking of drugs.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -23573,7 +23693,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:choice>
           <xs:element name="performer" type="MedicationAdministration.Performer" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The individual who was responsible for giving the medication to the patient.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates who or what performed the medication administration and how they were involved.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="statusReason" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -23629,12 +23749,12 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
         <xs:sequence>
           <xs:element name="function" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Distinguishes the type of performer in the administration.</xs:documentation>
+              <xs:documentation xml:lang="en">Distinguishes the type of involvement of the performer in the medication administration.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="actor" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The device, practitioner, etc. who performed the action.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates who or what performed the medication administration.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -23995,7 +24115,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">This records identifiers associated with this medication request that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. For example a re-imbursement system might issue its own id for each prescription that is created.  This is particularly important where FHIR only provides part of an entire workflow process where records must be tracked through an entire system.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="0" maxOccurs="1" type="MedicationRequestStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MedicationRequestStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code specifying the current state of the order.  Generally this will be active or completed state.</xs:documentation>
            </xs:annotation>
@@ -24263,6 +24383,11 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
       <xs:enumeration value="order">
         <xs:annotation>
           <xs:documentation xml:lang="en">Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="original-order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Original Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="instance-order">
@@ -25722,11 +25847,13 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">A MessageDefinition that is superseded by this definition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="event" minOccurs="0" maxOccurs="1" type="uri">
+          <xs:choice minOccurs="1" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">Link to the defined event type.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
+              <xs:documentation xml:lang="en">Event code or link to the EventDefinition.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="eventCoding" type="Coding"/>
+            <xs:element name="eventUri" type="uri"/>
+          </xs:choice>
           <xs:element name="category" minOccurs="0" maxOccurs="1" type="MessageSignificanceCategory">
             <xs:annotation>
               <xs:documentation xml:lang="en">The impact of the content of the message.</xs:documentation>
@@ -25737,9 +25864,9 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Identifies the resource (or resources) that are being addressed by the event.  For example, the Encounter for an admit message or two Account records for a merge.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="responseRequired" minOccurs="0" maxOccurs="1" type="boolean">
+          <xs:element name="responseRequired" minOccurs="0" maxOccurs="1" type="messageheaderResponseRequest">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates whether a response is required for this message.</xs:documentation>
+              <xs:documentation xml:lang="en">Declare at a message definition level whether a response is required or only upon error or success, or never.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="allowedResponse" type="MessageDefinition.AllowedResponse" minOccurs="0" maxOccurs="unbounded">
@@ -25833,6 +25960,41 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:simpleType name="messageheaderResponseRequest-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="always">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Always</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="on-error">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Error/reject conditions only</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="never">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Never</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="on-success">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Successful completion only</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="messageheaderResponseRequest">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Response definition</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="messageheaderResponseRequest-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:element name="MessageHeader" type="MessageHeader">
     <xs:annotation>
       <xs:documentation xml:lang="en">The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.</xs:documentation>
@@ -25846,11 +26008,13 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
     <xs:complexContent>
       <xs:extension base="DomainResource">
         <xs:sequence>
-          <xs:element name="event" minOccurs="1" maxOccurs="1" type="Coding">
+          <xs:choice minOccurs="1" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value &quot;http://hl7.org/fhir/message-events&quot;.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
+              <xs:documentation xml:lang="en">Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value &quot;http://hl7.org/fhir/message-events&quot;.  Alternatively uri to the EventDefinition.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="eventCoding" type="Coding"/>
+            <xs:element name="eventUri" type="uri"/>
+          </xs:choice>
           <xs:element name="destination" type="MessageHeader.Destination" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">The destination application which the message is intended for.</xs:documentation>
@@ -26229,9 +26393,14 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Identifiers assigned to this order by the order sender or by the order receiver.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="0" maxOccurs="1" type="NutritionOrderStatus">
+          <xs:element name="status" minOccurs="0" maxOccurs="1" type="RequestStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">The workflow status of the nutrition order/request.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="intent" minOccurs="1" maxOccurs="1" type="RequestIntent">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the level of authority/intentionality associated with the {{title}} and where the request fits into the workflow chain.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="patient" minOccurs="1" maxOccurs="1" type="Reference">
@@ -26496,63 +26665,58 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="NutritionOrderStatus-list">
+  <xs:simpleType name="RequestIntent-list">
     <xs:restriction base="code-primitive">
-      <xs:enumeration value="proposed">
+      <xs:enumeration value="proposal">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Proposed</xs:documentation>
+          <xs:documentation xml:lang="en">Proposal</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="draft">
+      <xs:enumeration value="plan">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Draft</xs:documentation>
+          <xs:documentation xml:lang="en">Plan</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="planned">
+      <xs:enumeration value="order">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Planned</xs:documentation>
+          <xs:documentation xml:lang="en">Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="requested">
+      <xs:enumeration value="original-order">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Requested</xs:documentation>
+          <xs:documentation xml:lang="en">Original Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="active">
+      <xs:enumeration value="reflex-order">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Active</xs:documentation>
+          <xs:documentation xml:lang="en">Reflex Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="on-hold">
+      <xs:enumeration value="filler-order">
         <xs:annotation>
-          <xs:documentation xml:lang="en">On-Hold</xs:documentation>
+          <xs:documentation xml:lang="en">Filler Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="completed">
+      <xs:enumeration value="instance-order">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Completed</xs:documentation>
+          <xs:documentation xml:lang="en">Instance Order</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="cancelled">
+      <xs:enumeration value="option">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Cancelled</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="entered-in-error">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Entered in Error</xs:documentation>
+          <xs:documentation xml:lang="en">Option</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="NutritionOrderStatus">
+  <xs:complexType name="RequestIntent">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Codes specifying the state of the request. Describes the lifecycle of the nutrition order.</xs:documentation>
+      <xs:documentation xml:lang="en">Codes indicating the degree of authority/intentionality associated with a nutrition order</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Element">
-        <xs:attribute name="value" type="NutritionOrderStatus-list" use="optional"/>
+        <xs:attribute name="value" type="RequestIntent-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -27106,7 +27270,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="jobDuty" minOccurs="0" maxOccurs="unbounded" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The regular actions performed at a single job.</xs:documentation>
+              <xs:documentation xml:lang="en">A regular action performed at a single job.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="occupationalHazard" minOccurs="0" maxOccurs="unbounded" type="string">
@@ -33024,61 +33188,6 @@ Any information provided in these elements on a Questionnaire Item overrides the
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="RequestIntent-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="proposal">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Proposal</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="plan">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Plan</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="original-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Original Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="reflex-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Reflex Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="filler-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Filler Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="instance-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Instance Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="option">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Option</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="RequestIntent">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Codes indicating the degree of authority/intentionality associated with a request</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="RequestIntent-list" use="optional"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:element name="ResearchStudy" type="ResearchStudy">
     <xs:annotation>
       <xs:documentation xml:lang="en">A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.</xs:documentation>
@@ -38383,7 +38492,7 @@ Any information provided in these elements on a Questionnaire Item overrides the
           </xs:element>
           <xs:element name="codeSearch" minOccurs="0" maxOccurs="1" type="CodeSearchSupport">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The degree to which the the server supports the code search parameter on ValueSet, if it is supported.</xs:documentation>
+              <xs:documentation xml:lang="en">The degree to which the server supports the code search parameter on ValueSet, if it is supported.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="validateCode" type="TerminologyCapabilities.ValidateCode" minOccurs="0" maxOccurs="1">
@@ -38593,7 +38702,7 @@ Any information provided in these elements on a Questionnaire Item overrides the
   </xs:simpleType>
   <xs:complexType name="CodeSearchSupport">
     <xs:annotation>
-      <xs:documentation xml:lang="en">The degree to which the the server supports the code search parameter on ValueSet, if it is supported</xs:documentation>
+      <xs:documentation xml:lang="en">The degree to which the server supports the code search parameter on ValueSet, if it is supported</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
