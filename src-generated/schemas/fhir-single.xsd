@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Feb 10, 2018 21:05+0000 for FHIR v3.2.0 
+  Generated on Thu, Feb 22, 2018 19:43+0000 for FHIR v3.2.0 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://hl7.org/fhir" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" version="3.2.0">
   <!-- Note: When using this schema with some tools, it may also be necessary to declare xmlns:xml="http://www.w3.org/XML/1998/namespace", however this causes performance issues with other tools and thus is not in the base schemas. -->
@@ -250,8 +250,8 @@
   </xs:simpleType>
   <xs:complexType name="markdown">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A string that may contain markdown syntax for optional processing by a mark down presentation engine</xs:documentation>
-      <xs:documentation xml:lang="en">Systems are not required to have markdown support, and there is considerable variation in markdown syntax, so the text should be readable without markdown processing. The preferred markdown syntax is described here: http://daringfireball.net/projects/markdown/syntax (and tests here: http://daringfireball.net/projects/downloads/MarkdownTest_1.0.zip)</xs:documentation>
+      <xs:documentation xml:lang="en">A string that may contain Github Flavored Markdown syntax for optional processing by a mark down presentation engine</xs:documentation>
+      <xs:documentation xml:lang="en">Systems are not required to have markdown support, so the text should be readable without markdown processing. The markdown syntax is GFM - see https://github.github.com/gfm/</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id referenced from the Narrative, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2831,6 +2831,11 @@
               <xs:documentation xml:lang="en">If true, the value of this element affects the interpretation of the element or resource that contains it, and the value of the element cannot be ignored. Typically, this is used for status, negation and qualification codes. The effect of this is that the element cannot be ignored by systems: they SHALL either recognize the element and process it, and/or a pre-determination has been made that it is not relevant to their particular system.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name="isModifierReason" type="string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Explains how that element affects the interpretation of the resource or element that contains it.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name="isSummary" type="boolean" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">Whether the element should be included if a client requests a search with the parameter _summary=true.</xs:documentation>
@@ -2969,14 +2974,14 @@
               <xs:documentation xml:lang="en">URL of Data type or Resource that is a(or the) type used for this element. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition e.g. &quot;string&quot; is a reference to http://hl7.org/fhir/StructureDefinition/string. Absolute URLs are only allowed in logical models.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="profile" type="uri" minOccurs="0" maxOccurs="1">
+          <xs:element name="profile" type="uri" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a profile structure or implementation Guide that SHALL hold for the datatype this element refers to. Can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the type SHALL conform to at least one profile defined in the implementation guide.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifies a profile structure or implementation Guide that applies to the datatype this element refers to. If any profiles are specified, then the content must conform to at least one of them. The URL can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the type SHALL conform to at least one profile defined in the implementation guide.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="targetProfile" type="uri" minOccurs="0" maxOccurs="1">
+          <xs:element name="targetProfile" type="uri" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Used when the type is &quot;Reference&quot;, and Identifies a profile structure or implementation Guide that SHALL be true for the target of the reference this element refers to. Can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the target resource SHALL conform to at least one profile defined in the implementation guide.</xs:documentation>
+              <xs:documentation xml:lang="en">Used when the type is &quot;Reference&quot;, and Identifies a profile structure or implementation Guide that applies to the target of the reference this element refers to. If any profiles are specified, then the content must conform to at least one of them. The URL can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the target resource SHALL conform to at least one profile defined in the implementation guide.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="aggregation" type="AggregationMode" minOccurs="0" maxOccurs="unbounded">
@@ -3889,7 +3894,7 @@
               <xs:documentation xml:lang="en">Unique identifier used to reference the account.  Might or might not be intended for human use (e.g. credit card number).</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="0" maxOccurs="1" type="AccountStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="AccountStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates whether the account is presently used/usable or not.</xs:documentation>
            </xs:annotation>
@@ -3909,15 +3914,9 @@
               <xs:documentation xml:lang="en">Identifies the patient, device, practitioner, location or other object the account is associated with.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="period" minOccurs="0" maxOccurs="1" type="Period">
+          <xs:element name="servicePeriod" minOccurs="0" maxOccurs="1" type="Period">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies the period of time the account applies to; e.g. accounts created per fiscal year, quarter, etc.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="active" minOccurs="0" maxOccurs="1" type="Period">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the period of time over which the account is allowed to have transactions posted to it.
-This period may be different to the coveragePeriod which is the duration of time that services may occur.</xs:documentation>
+              <xs:documentation xml:lang="en">The date range of services associated with this account.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="coverage" type="Account.Coverage" minOccurs="0" maxOccurs="unbounded">
@@ -4013,6 +4012,16 @@ A coverage may only be resposible for specific types of charges, and the sequenc
       <xs:enumeration value="entered-in-error">
         <xs:annotation>
           <xs:documentation xml:lang="en">Entered in error</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="on-hold">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">On Hold</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="unknown">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Unknown</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -6123,7 +6132,7 @@ A coverage may only be resposible for specific types of charges, and the sequenc
               <xs:documentation xml:lang="en">The overall status of the Appointment. Each of the participants has their own participation status which indicates their involvement in the process, however this status indicates the shared status.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">A broad categorisation of the service that is to be performed during this appointment.</xs:documentation>
            </xs:annotation>
@@ -6203,7 +6212,7 @@ A coverage may only be resposible for specific types of charges, and the sequenc
               <xs:documentation xml:lang="en">While Appointment.comment contains information for internal use, Appointment.patientInstructions is used to capture patient facing information about the Appointment (e.g. please bring your referral or fast from 8pm night before).</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="incomingReferral" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="basedOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The referral request this appointment is allocated to assess (incoming referral).</xs:documentation>
            </xs:annotation>
@@ -6247,6 +6256,11 @@ A coverage may only be resposible for specific types of charges, and the sequenc
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="ParticipationStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">Participation status of the actor.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="period" minOccurs="0" maxOccurs="1" type="Period">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Participation period of the actor.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -6323,6 +6337,11 @@ A coverage may only be resposible for specific types of charges, and the sequenc
       <xs:enumeration value="entered-in-error">
         <xs:annotation>
           <xs:documentation xml:lang="en">Entered in error</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="checked-in">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Checked In</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -9251,6 +9270,11 @@ into another (possibly the same) biological entity.</xs:documentation>
               <xs:documentation xml:lang="en">The organization performing the service.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="costCenter" minOccurs="0" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The financial cost center permits the tracking of charge attribution.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="quantity" minOccurs="0" maxOccurs="1" type="Quantity">
             <xs:annotation>
               <xs:documentation xml:lang="en">Quantity of which the charge item has been serviced.</xs:documentation>
@@ -10820,12 +10844,12 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:element name="CodeSystem" type="CodeSystem">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="CodeSystem">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -10967,7 +10991,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CodeSystem.Filter">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -10998,7 +11022,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CodeSystem.Property">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -11029,7 +11053,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CodeSystem.Concept">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -11070,7 +11094,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CodeSystem.Designation">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -11096,7 +11120,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="CodeSystem.Property1">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A code system resource specifies a set of codes drawn from one or more code systems.</xs:documentation>
+      <xs:documentation xml:lang="en">The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -11885,12 +11909,12 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:element name="Composition" type="Composition">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="Composition">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -11898,7 +11922,7 @@ into another (possibly the same) biological entity.</xs:documentation>
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="1" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Logical identifier for the composition, assigned when created. This identifier stays constant as the composition is changed over time.</xs:documentation>
+              <xs:documentation xml:lang="en">A version-independent identifier for the Composition. This identifier stays constant as the composition is changed over time.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="CompositionStatus">
@@ -11977,12 +12001,12 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Attester">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="mode" minOccurs="1" maxOccurs="unbounded" type="CompositionAttestationMode">
+          <xs:element name="mode" minOccurs="1" maxOccurs="1" type="CompositionAttestationMode">
             <xs:annotation>
               <xs:documentation xml:lang="en">The type of attestation the authenticator offers.</xs:documentation>
            </xs:annotation>
@@ -12003,7 +12027,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.RelatesTo">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -12026,7 +12050,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Event">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -12052,7 +12076,7 @@ into another (possibly the same) biological entity.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="Composition.Section">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
+      <xs:documentation xml:lang="en">A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -12065,6 +12089,11 @@ into another (possibly the same) biological entity.</xs:documentation>
           <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code identifying the kind of content contained within the section. This must be consistent with the section title.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="author" minOccurs="0" maxOccurs="unbounded" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Identifies who is responsible for the information in this section, not necessarily who typed it in.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="text" minOccurs="0" maxOccurs="1" type="Narrative">
@@ -12864,12 +12893,12 @@ into another (possibly the same) biological entity.</xs:documentation>
     <xs:complexContent>
       <xs:extension base="DomainResource">
         <xs:sequence>
-          <xs:element name="identifier" minOccurs="0" maxOccurs="1" type="Identifier">
+          <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
               <xs:documentation xml:lang="en">Unique identifier for this copy of the Consent Statement.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="ConsentState">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="EventStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates the current state of this consent.</xs:documentation>
            </xs:annotation>
@@ -12894,7 +12923,7 @@ into another (possibly the same) biological entity.</xs:documentation>
               <xs:documentation xml:lang="en">When this  Consent was issued / created / indexed.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="consentingParty" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="performer" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions.</xs:documentation>
            </xs:annotation>
@@ -12919,7 +12948,7 @@ into another (possibly the same) biological entity.</xs:documentation>
           </xs:element>
           <xs:element name="policyRule" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A reference to the specific base computable policy.</xs:documentation>
+              <xs:documentation xml:lang="en">A reference to the specific base computable regulation or policy.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="verification" type="Consent.Verification" minOccurs="0" maxOccurs="unbounded">
@@ -12927,7 +12956,7 @@ into another (possibly the same) biological entity.</xs:documentation>
               <xs:documentation xml:lang="en">Whether a treatment instruction (e.g. artifical respiration yes or no) was verified with the patient, his/her family or another authorized person.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="provision" type="Consent.Provision" minOccurs="1" maxOccurs="1">
+          <xs:element name="provision" type="Consent.Provision" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.</xs:documentation>
            </xs:annotation>
@@ -13151,54 +13180,9 @@ into another (possibly the same) biological entity.</xs:documentation>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="ConsentState-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="draft">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Pending</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="proposed">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Proposed</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="active">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Active</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="rejected">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Rejected</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="inactive">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Inactive</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="entered-in-error">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Entered in Error</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="ConsentState">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Indicates the state of the consent</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="ConsentState-list" use="optional"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:simpleType name="ConsentScopeCodes-list">
     <xs:restriction base="code-primitive">
-      <xs:enumeration value="ADR">
+      <xs:enumeration value="adr">
         <xs:annotation>
           <xs:documentation xml:lang="en">Advanced Care Directive</xs:documentation>
         </xs:annotation>
@@ -13244,7 +13228,7 @@ into another (possibly the same) biological entity.</xs:documentation>
     <xs:complexContent>
       <xs:extension base="DomainResource">
         <xs:sequence>
-          <xs:element name="identifier" minOccurs="0" maxOccurs="1" type="Identifier">
+          <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
               <xs:documentation xml:lang="en">Unique identifier for this Contract or a derivative that references a Source Contract.</xs:documentation>
            </xs:annotation>
@@ -13851,16 +13835,6 @@ into another (possibly the same) biological entity.</xs:documentation>
               <xs:documentation xml:lang="en">A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="grouping" type="Coverage.Grouping" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="sequence" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">An optional counter for a particular instance of the identified coverage which increments upon each renewal.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
           <xs:element name="order" minOccurs="0" maxOccurs="1" type="positiveInt">
             <xs:annotation>
               <xs:documentation xml:lang="en">The order of applicability of this coverage relative to other coverages which are currently inforce. Note, there may be gaps in the numbering and this does not imply primary, secondard etc. as the specific positioning of coverages depends upon the episode of care.</xs:documentation>
@@ -13905,77 +13879,6 @@ into another (possibly the same) biological entity.</xs:documentation>
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
               <xs:documentation xml:lang="en">A short description for the class.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="Coverage.Grouping">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Financial instrument which may be used to reimburse or pay for health care products and services.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="group" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="groupDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the group.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subGroup" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a subset of an employer group.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subGroupDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the subgroup.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="plan" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a collection of benefits provided to employees. May be referred to as a Section or Division ID.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="planDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the plan.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subPlan" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a sub-style or sub-collective of coverage issued by the underwriter, for example may be used to identify a subset of a collection of benefits provided to employees.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subPlanDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the subplan.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="class" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a style or collective of coverage issues by the underwriter, for example may be used to identify a class of coverage such as a level of deductables or co-payment.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="classDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the class.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subClass" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Identifies a sub-style or sub-collective of coverage issues by the underwriter, for example may be used to identify a subclass of coverage such as a sub-level of deductables or co-payment.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="subClassDisplay" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A short description for the subclass.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -15863,6 +15766,11 @@ http://hl7.org/fhir/NamingSystem/iccbba-other-di.</xs:documentation>
               <xs:documentation xml:lang="en">Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="quantity" minOccurs="0" maxOccurs="1" type="Quantity">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The number of repetitions of a service or product.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="unitPrice" minOccurs="0" maxOccurs="1" type="Money">
             <xs:annotation>
               <xs:documentation xml:lang="en">The fee for an addittional service or product or charge.</xs:documentation>
@@ -15873,6 +15781,29 @@ http://hl7.org/fhir/NamingSystem/iccbba-other-di.</xs:documentation>
               <xs:documentation xml:lang="en">Facility where the services were provided.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="diagnosis" type="EligibilityRequest.Diagnosis" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">List of patient diagnosis for which care is sought.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EligibilityRequest.Diagnosis">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The diagnosis.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="diagnosisCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="diagnosisReference" type="Reference"/>
+          </xs:choice>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -16152,16 +16083,14 @@ http://hl7.org/fhir/NamingSystem/iccbba-other-di.</xs:documentation>
               <xs:documentation xml:lang="en">The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="class" minOccurs="0" maxOccurs="1" type="Coding">
+          <xs:element name="class" minOccurs="1" maxOccurs="1" type="Coding">
             <xs:annotation>
-              <xs:documentation xml:lang="en">inpatient | outpatient | ambulatory | emergency +.</xs:documentation>
+              <xs:documentation xml:lang="en">Concepts representing classification of patient encounter such as ambulatory (outpatient), inpatient, emergency, home health or others due to local variations.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="classHistory" type="Encounter.ClassHistory" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The class history permits the tracking of the encounters transitions without needing to go  through the resource history.
-
-This would be used for a case where an admission starts of as an emergency encounter, then transisions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kindof discharge from emergency to inpatient.</xs:documentation>
+              <xs:documentation xml:lang="en">The class history permits the tracking of the encounters transitions without needing to go  through the resource history.  This would be used for a case where an admission starts of as an emergency encounter, then transisions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kindof discharge from emergency to inpatient.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="type" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -16241,9 +16170,7 @@ This would be used for a case where an admission starts of as an emergency encou
           </xs:element>
           <xs:element name="serviceProvider" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The organization that is primarily responsible for this Encounter's services. This MAY be the same as the organization on the Patient record, however it could be different, such as if the actor performing the services was from an external organization (which may be billed seperately) for an external consultation.
-
-Refer to the example bundle showing an abbreviated set of Encounters for a colonoscopy.</xs:documentation>
+              <xs:documentation xml:lang="en">The organization that is primarily responsible for this Encounter's services. This MAY be the same as the organization on the Patient record, however it could be different, such as if the actor performing the services was from an external organization (which may be billed seperately) for an external consultation.  Refer to the example bundle showing an abbreviated set of Encounters for a colonoscopy.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="partOf" minOccurs="0" maxOccurs="1" type="Reference">
@@ -18947,7 +18874,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="date" minOccurs="0" maxOccurs="1" type="dateTime">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The date (and possibly time) when the family member history was taken.</xs:documentation>
+              <xs:documentation xml:lang="en">The date (and possibly time) when the family member history was recorded or last updated.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="string">
@@ -19977,7 +19904,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The organization that provides this healthcare service.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Identifies the broad category of service being performed or delivered.</xs:documentation>
            </xs:annotation>
@@ -20465,6 +20392,11 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Indicates the current status of the immunization event.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="statusReason" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the reason the immunization event was not performed.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="vaccineCode" minOccurs="1" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Vaccine that was administered or was to be administered.</xs:documentation>
@@ -20530,7 +20462,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The quantity of vaccine product that was administered.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="practitioner" type="Immunization.Practitioner" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="performer" type="Immunization.Performer" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates who performed the immunization event.</xs:documentation>
            </xs:annotation>
@@ -20540,9 +20472,24 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Extra information about the immunization that is not conveyed by the other attributes.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="reason" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+          <xs:element name="reasonCode" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Reasons why a vaccine was or was not administered.</xs:documentation>
+              <xs:documentation xml:lang="en">Reasons why the vaccine was administered.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="reasonReference" minOccurs="0" maxOccurs="unbounded" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Condition, Observation or DiagnosticReport that supports why the immunization was administered.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="isPotent" minOccurs="0" maxOccurs="1" type="boolean">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indication if a dose is considered to be subpotent. By default, a dose should be considered to be potent.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="subpotentReason" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Reason why a dose is considered to be subpotent.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="education" type="Immunization.Education" minOccurs="0" maxOccurs="unbounded">
@@ -20564,21 +20511,21 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="Immunization.Practitioner">
+  <xs:complexType name="Immunization.Performer">
     <xs:annotation>
       <xs:documentation xml:lang="en">Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="role" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="function" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Describes the type of performance (e.g. ordering provider, administering provider, etc.).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="actor" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The practitioner who performed the action.</xs:documentation>
+              <xs:documentation xml:lang="en">The practitioner or organization who performed the action.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -20594,7 +20541,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
         <xs:sequence>
           <xs:element name="documentType" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifier of the material presented ot the patient.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifier of the material presented to the patient.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="reference" minOccurs="0" maxOccurs="1" type="uri">
@@ -22550,7 +22497,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Indicates whether a resource instance represents a specific location or a class of locations.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="type" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates the type of function performed at the location.</xs:documentation>
            </xs:annotation>
@@ -23332,14 +23279,14 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">A larger event of which this particular event is a component or step.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MediaStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="EventStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">The current state of the {{title}}.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A code that classifies the general type of observation being made. For example, whether the media is an image, video or audio recording.</xs:documentation>
+              <xs:documentation xml:lang="en">A code that classifies whether the media is an image, video or audio recording or some other media category.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="modality" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -23430,61 +23377,6 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
            </xs:annotation>
           </xs:element>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="MediaStatus-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="preparation">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Preparation</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="in-progress">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">In Progress</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="not-done">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Not Done</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="suspended">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Suspended</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="aborted">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Aborted</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="completed">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Completed</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="entered-in-error">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Entered in Error</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="unknown">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Unknown</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="MediaStatus">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Codes identifying the stage lifecycle stage of a event</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="MediaStatus-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -23877,7 +23769,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The procedure that the dispense is done because of.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="0" maxOccurs="1" type="MedicationDispenseStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MedicationDispenseStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code specifying the state of the set of dispense events.</xs:documentation>
            </xs:annotation>
@@ -24059,9 +23951,9 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           <xs:documentation xml:lang="en">In Progress</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="not-done">
+      <xs:enumeration value="cancelled">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Not Done</xs:documentation>
+          <xs:documentation xml:lang="en">Cancelled</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="on-hold">
@@ -24082,6 +23974,11 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
       <xs:enumeration value="stopped">
         <xs:annotation>
           <xs:documentation xml:lang="en">Stopped</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="unknown">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Unknown</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -24448,7 +24345,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="statusReason" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A code indicating why the medication was not taken.</xs:documentation>
+              <xs:documentation xml:lang="en">Captures the reason for the current state of the MedicationStatement.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -25895,7 +25792,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">A profile that reflects constraints for the focal resource (and potentially for related resources).</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="min" minOccurs="0" maxOccurs="1" type="unsignedInt">
+          <xs:element name="min" minOccurs="1" maxOccurs="1" type="unsignedInt">
             <xs:annotation>
               <xs:documentation xml:lang="en">Identifies the minimum number of resources of this type that must be pointed to by a message in order for it to be valid against this MessageDefinition.</xs:documentation>
            </xs:annotation>
@@ -26393,14 +26290,19 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">Identifiers assigned to this order by the order sender or by the order receiver.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="0" maxOccurs="1" type="RequestStatus">
+          <xs:element name="instantiates" minOccurs="0" maxOccurs="unbounded" type="uri">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The URL pointing to a protocol, guideline, orderset or other definition that is adhered to in whole or in part by this NutritionOrder.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="RequestStatus">
             <xs:annotation>
               <xs:documentation xml:lang="en">The workflow status of the nutrition order/request.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="intent" minOccurs="1" maxOccurs="1" type="RequestIntent">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the level of authority/intentionality associated with the {{title}} and where the request fits into the workflow chain.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates the level of authority/intentionality associated with the NutrionOrder and where the request fits into the workflow chain.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="patient" minOccurs="1" maxOccurs="1" type="Reference">
@@ -26408,7 +26310,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
               <xs:documentation xml:lang="en">The person (patient) who needs the nutrition order for an oral diet, nutritional supplement and/or enteral or formula feeding.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="encounter" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="context" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">An encounter that provides additional information about the healthcare context in which this request is made.</xs:documentation>
            </xs:annotation>
@@ -26875,12 +26777,12 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
         <xs:sequence>
           <xs:element name="low" minOccurs="0" maxOccurs="1" type="Quantity">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is &gt;=5 - &lt;=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is &lt;=2.3).</xs:documentation>
+              <xs:documentation xml:lang="en">The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is &gt;=5 - &lt;=9). If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is &lt;=2.3).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="high" minOccurs="0" maxOccurs="1" type="Quantity">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is &gt;=5 - &lt;=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is &gt;= 2.3).</xs:documentation>
+              <xs:documentation xml:lang="en">The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is &gt;=5 - &lt;=9). If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is &gt;= 2.3).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -31447,7 +31349,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="report" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">This could be a histology result, pathology report, surgical report, etc..</xs:documentation>
+              <xs:documentation xml:lang="en">This could be a histology result, pathology report, surgical report, etc.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="complication" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -31467,7 +31369,7 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="note" minOccurs="0" maxOccurs="unbounded" type="Annotation">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Any other notes about the procedure.  E.g. the operative notes.</xs:documentation>
+              <xs:documentation xml:lang="en">Any other notes and comments about the procedure.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="focalDevice" type="Procedure.FocalDevice" minOccurs="0" maxOccurs="unbounded">
@@ -32410,16 +32312,15 @@ Refer to the example bundle showing an abbreviated set of Encounters for a colon
           </xs:element>
           <xs:element name="definition" minOccurs="0" maxOccurs="1" type="uri">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A reference to an [[[ElementDefinition]]] that provides the details for the item. If a definition is provided, then the following element values can be inferred from the definition: 
+              <xs:documentation xml:lang="en">A reference to an [[[ElementDefinition]]] that provides the details for the item. If a definition is provided, then the following element values can be derived from the definition:   
 
-* code (ElementDefinition.code)
-* type (ElementDefinition.type)
-* required (ElementDefinition.min)
-* repeats (ElementDefinition.max)
-* maxLength (ElementDefinition.maxLength)
-* options (ElementDefinition.binding)
-
-Any information provided in these elements on a Questionnaire Item overrides the information from the definition.</xs:documentation>
+* code (ElementDefinition.code) 
+* type (ElementDefinition.type) 
+* required (ElementDefinition.min) 
+* repeats (ElementDefinition.max) 
+* maxLength (ElementDefinition.maxLength) 
+* options (ElementDefinition.binding)  
+Any information provided in these elements on a Questionnaire Item overrides the information from the definition, and some are require for efficient implementation (e.g. enforcing invariants).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="code" minOccurs="0" maxOccurs="unbounded" type="Coding">
@@ -33748,7 +33649,7 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">Whether this schedule record is in active use, or should not be used (such as was entered in error).</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">A broad categorisation of the service that is to be performed during this appointment.</xs:documentation>
            </xs:annotation>
@@ -34219,6 +34120,11 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">The Genome Build used for reference, following GRCh build versions e.g. 'GRCh 37'.  Version number must be included if a versioned release of a primary build was used.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="orientation" minOccurs="0" maxOccurs="1" type="orientationType">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A relative reference to a DNA strand based on gene orientation. The strand that contains the open reading frame of the gene is the &quot;sense&quot; strand, and the opposite complementary strand is the &quot;antisense&quot; strand.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="referenceSeqId" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Reference identifier of reference sequence submitted to NCBI. It must match the type in the Sequence.type field. For example, the prefix, “NG_” identifies reference sequence for genes, “NM_” for messenger RNA transcripts, and “NP_” for amino acid sequences.</xs:documentation>
@@ -34234,9 +34140,9 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">A string like &quot;ACGT&quot;.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="strand" minOccurs="0" maxOccurs="1" type="integer">
+          <xs:element name="strand" minOccurs="0" maxOccurs="1" type="strandType">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Directionality of DNA sequence. Available values are &quot;1&quot; for the plus strand (5' to 3')/Watson/Sense/positive  and &quot;-1&quot; for the minus strand(3' to 5')/Crick/Antisense/negative.</xs:documentation>
+              <xs:documentation xml:lang="en">An absolute reference to a strand. The Watson strand is the strand whose 5'-end is on the short arm of the chromosome, and the Crick strand as the one whose 5'-end is on the long arm.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="windowStart" minOccurs="1" maxOccurs="1" type="integer">
@@ -34545,6 +34451,56 @@ Any information provided in these elements on a Questionnaire Item overrides the
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:simpleType name="strandType-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="watson">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Watson strand of referenceSeq</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="crick">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Crick strand of referenceSeq</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="strandType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Type for strand</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="strandType-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="orientationType-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="sense">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Sense orientation of referenceSeq</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="antisense">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Antisense orientation of referenceSeq</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="orientationType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Type for orientation</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="orientationType-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:simpleType name="repositoryType-list">
     <xs:restriction base="code-primitive">
       <xs:enumeration value="directlink">
@@ -34805,6 +34761,11 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">Whether the request is a proposal, plan, an original order or a reflex order.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A code that classifies the service for searching, sorting and display purposes (e.g. &quot;Surgical Procedure&quot;).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="priority" minOccurs="0" maxOccurs="1" type="RequestPriority">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates how quickly the ServiceRequest should be addressed with respect to other requests.</xs:documentation>
@@ -34813,11 +34774,6 @@ Any information provided in these elements on a Questionnaire Item overrides the
           <xs:element name="doNotPerform" minOccurs="0" maxOccurs="1" type="boolean">
             <xs:annotation>
               <xs:documentation xml:lang="en">Set this to true if the record is saying that the service/procedure should NOT be performed.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A code that classifies the service for searching, sorting and display purposes (e.g. &quot;Surgical Procedure&quot;).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -34942,7 +34898,7 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">External Ids for this item.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="serviceCategory" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">A broad categorisation of the service that is to be performed during this appointment.</xs:documentation>
            </xs:annotation>
@@ -37706,9 +37662,9 @@ Any information provided in these elements on a Questionnaire Item overrides the
     <xs:complexContent>
       <xs:extension base="DomainResource">
         <xs:sequence>
-          <xs:element name="identifier" minOccurs="0" maxOccurs="1" type="Identifier">
+          <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifier assigned by the dispensing facility when the item(s) is dispensed.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifier for the supply delivery event that is used to identify it across multiple disparate systems.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="basedOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -42896,14 +42852,9 @@ Any information provided in these elements on a Questionnaire Item overrides the
               <xs:documentation xml:lang="en">Adjustment for astigmatism measured in integer degrees.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="prism" minOccurs="0" maxOccurs="1" type="decimal">
+          <xs:element name="prism" type="VisionPrescription.Prism" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Amount of prism to compensate for eye alignment in fractional units.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="base" minOccurs="0" maxOccurs="1" type="VisionBase">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The relative base, or reference lens edge, for the prism.</xs:documentation>
+              <xs:documentation xml:lang="en">Allows for adjustment on two axis.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="add" minOccurs="0" maxOccurs="1" type="decimal">
@@ -42944,6 +42895,27 @@ Any information provided in these elements on a Questionnaire Item overrides the
           <xs:element name="note" minOccurs="0" maxOccurs="unbounded" type="Annotation">
             <xs:annotation>
               <xs:documentation xml:lang="en">Notes for special requirements such as coatings and lens materials.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VisionPrescription.Prism">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">An authorization for the supply of glasses and/or contact lenses to a patient.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="amount" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Amount of prism to compensate for eye alignment in fractional units.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="base" minOccurs="1" maxOccurs="1" type="VisionBase">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The relative base, or reference lens edge, for the prism.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
