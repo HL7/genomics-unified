@@ -490,6 +490,11 @@
         <title value="Appendix A: Relation to v2 reporting"/>
         <kind value="page"/>
       </page>
+      <page>
+        <source value="cgapps.html"/>
+        <title value="Clinical Genomic Apps"/>
+        <kind value="page"/>
+      </page>
     </page>
     <page>
       <source value="artifacts.html"/>
