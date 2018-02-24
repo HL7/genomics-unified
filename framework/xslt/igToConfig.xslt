@@ -110,15 +110,15 @@
   ],
   "defaults": {
     "Any": {
-  </xsl:text>
+      "java" : false,&#x0a;</xsl:text>
   <xsl:if test="not($includeXml)">
-    <xsl:text>    "xml" : false,&#x0a;</xsl:text>
+    <xsl:text>      "xml" : false,&#x0a;</xsl:text>
   </xsl:if>
   <xsl:if test="not($includeJson)">
-    <xsl:text>    "json" : false,&#x0a;</xsl:text>
+    <xsl:text>      "json" : false,&#x0a;</xsl:text>
   </xsl:if>
   <xsl:if test="not($includeTtl)">
-    <xsl:text>    "ttl" : false,&#x0a;</xsl:text>
+    <xsl:text>      "ttl" : false,&#x0a;</xsl:text>
   </xsl:if>
   <xsl:text>      "template-base": "../framework/templates/template-instance-base.html",
       "template-format": "../framework/templates/template-instance-format.html",

@@ -53,7 +53,8 @@
   ],
   "defaults": {
     "Any": {
-        "template-base": "../framework/templates/template-instance-base.html",
+      "java" : false,
+      "template-base": "../framework/templates/template-instance-base.html",
       "template-format": "../framework/templates/template-instance-format.html",
       "base": "{{[id]}}.html",
       "format": "{{[id]}}.{{[fmt]}}.html"

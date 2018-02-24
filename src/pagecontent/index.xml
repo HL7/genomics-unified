@@ -28,7 +28,7 @@
   <a name="principles"> </a>
   <h2>Guiding principles</h2>
   <p>
-    This guide adheres to a set of design approches:  
+    This guide adheres to a set of design approches:
   </p>
   <ul>
     <li>It is intended to be international in scope and only leverages terminologies which are freely available to all countries.</li>
@@ -47,8 +47,8 @@
   <h2>Understanding FHIR</h2>
   <p>
     This implementation guide is based on the HL7 <a href="{{site.data.fhir.path}}index.html">FHIR</a> standard.  It uses terminology, notations and design principles that are
-    specific to FHIR.  Before reading this implementation guide, it's important to be familiar with some of the basic principles of FHIR as well 
-    as general guidance on how to read FHIR specifications.  Readers who are unfamiliar with FHIR are encouraged to read (or at least skim) the following 
+    specific to FHIR.  Before reading this implementation guide, it's important to be familiar with some of the basic principles of FHIR as well
+    as general guidance on how to read FHIR specifications.  Readers who are unfamiliar with FHIR are encouraged to read (or at least skim) the following
     prior to reading the rest of this implementation guide.
   </p>
   <ul>
@@ -128,7 +128,7 @@
       </tr>
       <tr>
         <th><a href="cgapps.html">Appendix B: Clinical Genomics Apps</a></th>
-        <td>Introduction of the Clinical Genomics Applications(SMART App, etc) apply for this implementation guide</td>
+        <td>Introduction of the Clinical Genomics Applications(Genomics Advisor, etc) apply for this implementation guide</td>
       </tr>
     </tbody>
   </table>
