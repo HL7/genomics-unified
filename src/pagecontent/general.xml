@@ -2,7 +2,7 @@
   <p>
     This section defines the "core" profiles and concepts that would be expected to be present in most genetic reports, regardless of type and how those profiles relate to each other.  Concepts covered include the genomics report itself and the high-level categories of observations and other elements that make up the report, such as patient, specimen, variants, haplotypes, genotypes, etc.
   </p>
-  
+
   <a name="diagnosticreport"> </a>
   <h2>Diagnostic Report</h2>
   <p>
@@ -59,9 +59,42 @@
   <p>
     This diagram also shows a specific example of a <i>Recommended Action</i> - the <a href="task-rec-followup.html">Recommended Followup</a> which includes suggestions for confirmatory testing, additional testing and/or genetic counselling.
   </p>
-  
+  <b>DiagnosticReport-genetics Profile</b>
+  <p>
+    This DiagnosticReport-genetics is built on top of DiagnosticReport. The new profile is used to describe a genetics test report. The result element in DiagnosticReport will refer to the Observation resource that can lead to a bundle of genetic observations. The element of code, effective[x], issued, performer, request, specimen are be used to describe the details of the genetic test. Extensions about AssessedCondition and FamilyMemberHistory are added. Overall, this profile extends the DiagnosticReport resource to enable reporting of structured genetic test results. In addition, it denotes condition context for genetic testing, which may influence reported variants and interpretations for large genomic testing panels.
+  </p>
+
+  <b>HLA genotyping results Profile</b>
+  <p>
+    Human leukocyte antigen (HLA) genotyping is fundamental for research and clinical practice in immunogenetics and histocompatibility. Pointers to external locations refer to registered methods, raw NGS reads, and reference standards can be conveyed in this profile. Information about allele assignment including ambiguous results and the allele database used for assignments is stored in extensions.
+  </p>
+
+  <p>
+    The structure of the HLA typing report in this profile attempts to follow the principles outlined in the Minimum Information for ReportIng Next-generation sequence Genotyping (MIRING). These principles were identified through a series of meetings with international group of stakeholders in the application of Next Generation Sequencing (NGS) technology for genotyping the HLA and KIR loci as well as other immune-related loci (http://igdawg.org/ngs.html). MIRING describes eight principles, described in detail in <a href="https://www.ncbi.nlm.nih.gov/pubmed/26319908">Human Immunology. 2015 Dec; 76(12):954-962</a> . These include detailed metadata about:
+  </p>
+  <ol>
+    <li>MIRING Annotation</li>
+    <li>Reference Context</li>
+    <li>Full Genotype</li>
+    <li>Consensus Sequence</li>
+    <li>Novel Polymorphisms</li>
+    <li>Platform Documentation</li>
+    <li>Read Processing Documentation</li>
+    <li>Primary Data</li>
+  </ol>
+  <p>
+    These principles were implemented in a technical specification by extending an existing XML based format for exchanging histocompatibility and immunogenetic genotyping data called Histoimmunogenetics Markup Language (HML) to include results from NGS methodologies (https://bioinformatics.bethematchclinical.org/hla-resources/hml/). The resulting schema may be found in https://schemas.nmdp.org/. The National Marrow Donor Program (NMDP)/Be The Match uses this format for reporting HLA genotyping from potential donors and for patients needing stem cell transplants.
+  </p>
+  <p>
+    Both MIRING and HML were used to inform mapping data elements to FHIR resources such as Patient, Specimen, Sequence, Observation-Genetic Profile, and DiagnosticReport where possible. Several additional data elements were needed specifically for this use case, resulting in the development of a specific profile for reporting HLA genotyping results (Diagnostic Report Profile for HLA Genotyping Results).
+  </p>
+  <ul>
+    <li>Minimum information for reporting next generation sequence genotyping (MIRING): Guidelines for reporting HLA and KIR genotyping via next generation sequencing (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/26407912">here</a> )</li>
+    <li>Histoimmunogenetics Markup Language 1.0: Reporting Next Generation Sequencing-based HLA and KIR Genotyping (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/26319908">here</a> )</li>
+  </ul>
+
   <a name="general"> </a>
-  <h2>General Relationships</h2>   
+  <h2>General Relationships</h2>
   <p>
     To allow searching and appropriate navigation, the diagnostic report, observations and tasks cannot stand on their own.  They need to be related to the associated patient and/or specimen, the order that initiated the testing, the lab that performed the testing, etc.  FHIR design principles dictate that these associations be present on <i>every</i> resource instance.  That's because each resource could be accessed on its own as part of a query response, embedded in a document or message, passed to a decision support engine, etc.  However, this is still relatively lightweight because the information is included by reference only.
   </p>
@@ -81,10 +114,10 @@
     <li>The effective date is the date the genetic specimen was collected and the issued date is when the observation was performed.</li>
     <li>Of the different types of observations, Genetic Findings all have exactly one specimen.  The remainder might be associated with a specimen, but might not.</li>
   </ul>
-  
+
   <a name="findings"> </a>
   <h2>Genetic Findings</h2>
-  <p>The primary focus of genetic testing is making Genetic Findings.  These are the fine and coarse-grained descriptions of a specimen's genetic characteristics.  It is this information that leads to the actionable <i>Genetic Impacts</i> and the <i>Overall Interpretations</i> for the study.  
+  <p>The primary focus of genetic testing is making Genetic Findings.  These are the fine and coarse-grained descriptions of a specimen's genetic characteristics.  It is this information that leads to the actionable <i>Genetic Impacts</i> and the <i>Overall Interpretations</i> for the study.
   </p>
   <img src="1-general-fig4-genetic-findings.png" alt="Class diagram showing relationship of Descriptive and Computable genetic findings as well as genotypes, haplotypes, variations and sequences."/>
   <p>
@@ -104,11 +137,11 @@
   <p>
     These categories of observations have relationships.  Haplotypes can be identified based on the presence of variants.  Genotypes can be identified based on the presence of haplotypes and/or variants.  All three can be expressed as a combination of one or more sequences.
   </p>
-  
+
   <a name="other"> </a>
   <h2>Other content</h2>
   <p>
-    The profiles describing the detailed observations within a genetic report are found in the other sections of this implementation guide based on what type of testing and reporting is being done:  
+    The profiles describing the detailed observations within a genetic report are found in the other sections of this implementation guide based on what type of testing and reporting is being done:
   </p>
   <ul>
     <li>The <a href="sequencing.html">Sequenced Variants</a> section deals with all types of variants detected by formal sequencing, including simple/discrete variants, structural variants and complex variants detected by direct sequencing, shot-gun-based sequencing and array-based testing for specific variants.</li>
