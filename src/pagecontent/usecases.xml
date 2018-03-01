@@ -21,6 +21,18 @@
 		<li>Clinical and Research Data Warehouses</li>
 	</ol>
 	
+	<a name="Specimen Identification"> </a>
+	<h2>Specimen Identification</h2>
+	<ul>
+		<li>Germline testing for biomarkers/mutations (usually inherited)</li>
+		<li>Tumor testing for biomarkers/mutations (somatic / tumor specific)</li>
+		<li>Pediatric Testing</li>
+		<li>Infectious Disease Testing</li>
+	</ul>
+	<h3>Get references to all variants obtained from germline analysis</h3>
+	<pre class="http">
+		"GET /Observation?"
+	</pre>
 
 
 </div>
