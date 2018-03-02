@@ -1,0 +1,38 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+	<p>
+		We show use of the FHIR design we are proposing for these cases:
+	</p>
+	<ol>
+		<li>Specimen Identification
+			<ol>
+				<li>Get references to all variants obtained from germline analysis.</li>
+				<li>Explore antibacterial drug resistance over time (non-patient DNA)</li>
+			</ol>
+		</li>
+		<li>Clinical Sequencing – Germline Testing</li>
+		<li>Cancer Profiling</li>
+		<li>Decision Making Tools – Family History and Drug Dosage Calculators
+			<ol>
+				<li>Today clinicians translate (i.e. manually re-enter) genetic data into tools for decision making. This includes family history tools and drug dosage calculators. In the future, this data will automatically be incorporated into clinical decision making tools.</li>
+				<li>Get pharmacogenomic reporting and disease risk or diagnosis associated with variant</li>
+			</ol>
+		</li>
+		<li>Public Health</li>
+		<li>Clinical and Research Data Warehouses</li>
+	</ol>
+	
+	<a name="Specimen Identification"> </a>
+	<h2>Specimen Identification</h2>
+	<ul>
+		<li>Germline testing for biomarkers/mutations (usually inherited)</li>
+		<li>Tumor testing for biomarkers/mutations (somatic / tumor specific)</li>
+		<li>Pediatric Testing</li>
+		<li>Infectious Disease Testing</li>
+	</ul>
+	<h3>Get references to all variants obtained from germline analysis</h3>
+	<pre class="http">
+		"GET /Observation?"
+	</pre>
+
+
+</div>

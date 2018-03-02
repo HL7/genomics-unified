@@ -130,6 +130,10 @@
         <th><a href="cgapps.html">Appendix B: Clinical Genomics Apps</a></th>
         <td>Introduction of the Clinical Genomics Applications(Genomics Advisor, etc) apply for this implementation guide</td>
       </tr>
+      <tr>
+        <th><a href="usecases.html">HL7 Domain Analysis Use Cases</a></th>
+        <td>Some use cases on FHIR design: Specimen Identification, Clinial Sequencing and so on</td>
+      </tr>
     </tbody>
   </table>
   <blockquote class="stu-note">
