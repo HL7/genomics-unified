@@ -317,5 +317,10 @@
 <format value="generated"/>
 </page>
 </page>
+    <page>
+    	<source value="usecases.html"/>
+    	<title value="HL7 Domain Analysis Use Cases"/>
+    	<kind value="page"/>
+    </page>
   </page>
 </ImplementationGuide>
