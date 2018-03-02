@@ -59,12 +59,22 @@
   <p>
     This diagram also shows a specific example of a <i>Recommended Action</i> - the <a href="task-rec-followup.html">Recommended Followup</a> which includes suggestions for confirmatory testing, additional testing and/or genetic counselling.
   </p>
-  <b>DiagnosticReport-genetics Profile</b>
+
+  <a name="diagnosticreport-genetic-profile"> </a>
+  <h2>DiagnosticReport-genetics Profile</h2>
   <p>
     This DiagnosticReport-genetics is built on top of DiagnosticReport. The new profile is used to describe a genetics test report. The result element in DiagnosticReport will refer to the Observation resource that can lead to a bundle of genetic observations. The element of code, effective[x], issued, performer, request, specimen are be used to describe the details of the genetic test. Extensions about AssessedCondition and FamilyMemberHistory are added. Overall, this profile extends the DiagnosticReport resource to enable reporting of structured genetic test results. In addition, it denotes condition context for genetic testing, which may influence reported variants and interpretations for large genomic testing panels.
   </p>
+  <p>Following is the list of the extension in the DiagnosticReport Profile</p>
+  <ul>
+    <li>DiagnosticReport-geneticsAssessedCondition</li>
+    <li>DiagnosticReport-geneticsFamilyMemberHistory</li>
+    <li>DiagnosticReport-geneticsAnalysis</li>
+    <li>DiagnosticReport-geneticsReferences</li>
+  </ul>
 
-  <b>HLA genotyping results Profile</b>
+  <a name="diagnosticreport-hla-genotyping-results-profile"> </a>
+  <h2>HLA genotyping results profile</h2>
   <p>
     Human leukocyte antigen (HLA) genotyping is fundamental for research and clinical practice in immunogenetics and histocompatibility. Pointers to external locations refer to registered methods, raw NGS reads, and reference standards can be conveyed in this profile. Information about allele assignment including ambiguous results and the allele database used for assignments is stored in extensions.
   </p>
@@ -92,6 +102,17 @@
     <li>Minimum information for reporting next generation sequence genotyping (MIRING): Guidelines for reporting HLA and KIR genotyping via next generation sequencing (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/26407912">here</a> )</li>
     <li>Histoimmunogenetics Markup Language 1.0: Reporting Next Generation Sequencing-based HLA and KIR Genotyping (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/26319908">here</a> )</li>
   </ul>
+
+  <p>
+    The folloing is the list of extensions in HLA genotyping results profile:
+  </p>
+  <ul>
+    <li>hla-genotyping-results-glstring</li>
+    <li>hla-genotyping-results-haploid</li>
+    <li>hla-genotyping-results-allele-database</li>
+    <li>hla-genotyping-results-method</li>
+  </ul>
+  <p>More detail implementation information will be stated in this <a href="transplants.html">link</a></p>
 
   <a name="general"> </a>
   <h2>General Relationships</h2>
@@ -124,7 +145,7 @@
     <b>Figure 4 - Genetic Findings</b>
   </p>
   <p>
-    Genetic findings can be broen into two categories: those where the results are expressed as discrete coded data elements (<a href="obs-comp-gen-finding.html">computable findings</a>) and those where the results are primarily expressed as human narrative (<a href="obs-desc-gen-finding.html">non-computable findings</a>).  Both types of findings can supportthe determination of genetic impacts, but only computable findings can be used with automated decision support.
+    Genetic findings can be broken into two categories: those where the results are expressed as discrete coded data elements (<a href="obs-comp-gen-finding.html">computable findings</a>) and those where the results are primarily expressed as human narrative (<a href="obs-desc-gen-finding.html">non-computable findings</a>).  Both types of findings can supportthe determination of genetic impacts, but only computable findings can be used with automated decision support.
   </p>
   <p>
     Computable findings can be sub-divided into three types of observations:
@@ -150,6 +171,7 @@
     <li>The <a href="somatics.html">Somatic Genomic Reporting</a> section deals with non-germline variations, particularly those related to tumors.</li>
     <li>The <a href="transplants.html">Genomic Profiling for Transplantation</a> section deals with information related to variations relavant to matching of donor candidates with recipients, including HLA typing.</li>
   </ul>
+
   <p>
     Many genetic reports will draw on more than one of these areas.  For example, a somatic report will typically include sequencing information as well as information on likely tumor susceptability to particular medications.  Reports should draw on whatever sections are relevant.
   </p>
