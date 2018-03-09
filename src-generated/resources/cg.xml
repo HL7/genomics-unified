@@ -59,6 +59,17 @@
         <reference value="StructureDefinition/diagnosticreport"/>
       </exampleFor>
     </resource>
+    <resource>
+      <example value="true"/>
+      <name value="PGx Example"/>
+      <description value="Pharmacogenomic Report Example instances"/>
+      <sourceReference>
+        <reference value="Bundle/diagnosticreport-pgxexample"/>
+      </sourceReference>
+      <exampleFor>
+        <reference value="StructureDefinition/diagnosticreport"/>
+      </exampleFor>
+    </resource>
   </package>
   <page>
     <source value="toc.html"/>
@@ -313,6 +324,12 @@
 <page>
 <source value="diagnosticreport-cgexample.html"/>
 <ns32:title xmlns:ns32="http://hl7.org/fhir" value="CG Test"/>
+<kind value="example"/>
+<format value="generated"/>
+</page>
+<page>
+<source value="diagnosticreport-pgxexample.html"/>
+<ns33:title xmlns:ns33="http://hl7.org/fhir" value="PGx Example"/>
 <kind value="example"/>
 <format value="generated"/>
 </page>

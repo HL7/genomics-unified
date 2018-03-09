@@ -321,6 +321,13 @@
 </td>
 <td>Test instance showing data from the CG v2 spec</td>
 </tr>
+<tr>
+<td style="column-width:30%">
+<a href="diagnosticreport-pgxexample.html">
+                        •  PGx Example</a>
+</td>
+<td>Pharmacogenomic Report Example instances</td>
+</tr>
 </tbody>
 </table>
 </p>

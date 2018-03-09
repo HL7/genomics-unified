@@ -441,6 +441,17 @@
         <reference value="StructureDefinition/diagnosticreport"/>
       </exampleFor>
     </resource>
+    <resource>
+      <example value="true"/>
+      <name value="PGx Example"/>
+      <description value="Pharmacogenomic Report Example instances"/>
+      <sourceReference>
+        <reference value="Bundle/diagnosticreport-pgxexample"/>
+      </sourceReference>
+      <exampleFor>
+        <reference value="StructureDefinition/diagnosticreport"/>
+      </exampleFor>
+    </resource>
   </package>
   <page>
     <source value="toc.html"/>

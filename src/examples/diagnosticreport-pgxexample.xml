@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bundle xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+	<id value="diagnosticreport-pgxexample"/>
+	<type value="collection" />
+	<entry>
+		<fullUrl value="http://hl7.org/fhir/uv/cg/DiagnosticReport/pgx_report"/>
+		<resource>
+			<DiagnosticReport>
+				<id value="pgx_report"/>
+				<extension url="http://hl7.org/fhir/uv/cg/StructureDefinition/dr-recommendedAction">
+					<valueReference>
+						<reference value="Task/med_usage_impact_task_pgx_example"/>
+					</valueReference>
+				</extension>
+				<basedOn>
+					<reference value="ServiceRequest/pgx_reqeust"/>
+				</basedOn>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/v2/0074"/>
+						<code value="GE"/>
+						<display value="Genetics"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="81247-9"/>
+					</coding>
+				</code>
+				<subject>
+        	<reference value="Patient/patient"/>
+        </subject>
+        <effectiveDateTime value="2016"/>
+        <issued value="2018-03-06T00:00:00-05:00"/>
+        <performer>
+        	<reference value="Organization/lab"/>
+        </performer>
+				<result>
+					<reference value="Observation/med_impact_pgx_example"/>
+					<display value="genetics impact for medication metabolism accessment"/>
+				</result>
+				<result>
+					<reference value="Obervation/genotype_pgx_example"/>
+				</result>
+				<result>
+					<reference value="Observation/haplotype_1_pgx_example"/>
+				</result>
+				<result>
+					<reference value="Observation/haplotype_2_pgx_example"/>
+				</result>
+				<result>
+					<reference value="Observation/variant_1_pgx_example"/>
+				</result>
+				<result>
+					<reference value="Observation/variant_2_pgx_example"/>
+				</result>
+			</DiagnosticReport>
+		</resource>
+	</entry>
+	<entry>
+		<fullUrl value="http://hl7.org/fhir/uv/cg/Patient/patient"/>
+		<resource>
+			<Patient>
+			<id value="patient"/>
+			<text>
+				<status value="additional"/>
+				<div xmlns="http://www.w3.org/1999/xhtml">This would contain patient identifiers, demographics, etc.</div>
+			</text>
+			</Patient>
+		</resource>
+  	</entry>
+  	<entry>
+		<fullUrl value="http://hl7.org/fhir/uv/cg/Specimen/specimen"/>
+		<resource>
+			<Specimen>
+			<id value="specimen"/>
+			<text>
+				<status value="generated"/>
+				<div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
+			</text>
+			<subject>
+				<reference value="Patient/patient"/>
+			</subject>
+			</Specimen>
+		</resource>
+  	</entry>
+  	<entry>
+    	<fullUrl value="http://hl7.org/fhir/uv/cg/Organization/lab"/>
+	    <resource>
+			<Organization>
+			<id value="lab"/>
+			<text>
+				<status value="generated"/>
+				<div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
+			</text>
+			<name value="Some lab"/>
+			</Organization>
+	    </resource>
+  	</entry>
+  	<entry>
+	    <fullUrl value="http://hl7.org/fhir/uv/cg/ServiceRequest/pgx_request"/>
+	    <resource>
+			<ServiceRequest>
+				<id value="pgx_request"/>
+				<text>
+					<status value="generated"/>
+				  	<div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
+				</text>
+				<status value="active"/>
+				<intent value="original-order"/>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="81247-9"/>
+					</coding>
+				</code>
+				<subject>
+				  	<reference value="Patient/patient"/>
+				</subject>
+				<reasonCode>
+				  	<text value="Worried about family planning"/>
+				</reasonCode>
+			</ServiceRequest>
+	    </resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/med_impact_pgx_example"/>
+  		<resource>
+  			<Observation>
+					<id value="med_impact_pgx_example"/>
+					<status value="final"/>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="53040-2"/>
+							<display value="Genetic variation's effect on drug metabolism"/>
+						</coding>
+					</code>
+					<subject>
+						<reference value="Patient/patient"/>
+					</subject>
+					<effectiveDateTime value="2018"/>
+					<issued value="2018-03-06T00:00:00-05:00"/>
+					<performer>
+						<reference value="Organization/lab"/>
+					</performer>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="LA25390-8"/>
+							<display value="Rapid metabolizer"/>
+						</coding>
+					</valueCodeableConcept>
+					<specimen>
+			          	<reference value="Specimen/specimen"/>
+			        </specimen>
+					<component>
+						<code>
+							<coding>
+								<system value="http://loinc.org"/>
+								<code value="51963-7"/>
+								<display value="Medication assessed"/>
+							</coding>
+						</code>
+						<valueCodeableConcept>
+							<coding>
+								<system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
+								<code value="103"/>
+								<display value="6-mercaptopurine"/>
+							</coding>
+						</valueCodeableConcept>
+					</component>
+					<derivedFrom>
+						<reference value="Observation/genotype_pgx_example"/>
+					</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/genotype_pgx_example"/>
+  		<resource>
+  			<Observation>
+				<id value="genotype_pgx_example"/>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/observation-category"/>
+						<code value="laboraory"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="84413-4"/>
+						<display value="genotype display name"/>
+					</coding>
+				</code>
+				<effectiveDateTime value="2018"/>
+				<issued value="2018-03-06T00:00:00-05:00"/>
+				<valueString value="*4/*35B"/>
+				<specimen>
+		          	<reference value="Specimen/specimen"/>
+		        </specimen>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48018-6"/>
+							<display value="Gene studied ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.genenames.org"/>
+							<code value="2623"/>
+							<display value="CYP2C9"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<derivedFrom>
+					<reference value="Observation/haplotype_1_pgx_example"/>
+				</derivedFrom>
+				<derivedFrom>
+					<reference value="Observation/haplotype_2_pgx_example"/>
+				</derivedFrom>
+				<derivedFrom>
+					<reference value="Sequence/sequence_1_pgx_example"/>
+				</derivedFrom>
+				<derivedFrom>
+					<reference value="Sequence/sequence_2_pgx_example"/>
+				</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype_1_pgx_example"/>
+  		<resource>
+  			<Observation>
+				<id value="haplotype_1_pgx_example"/>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/observation-category"/>
+						<code value="laboraory"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="84414-2"/>
+						<display value="Haplotype Name"/>
+					</coding>
+				</code>
+				<effectiveDateTime value="2018"/>
+				<issued value="2018-03-06T00:00:00-05:00"/>
+				<valueString value="*35B"/>
+				<specimen>
+		          	<reference value="Specimen/specimen"/>
+		        </specimen>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48018-6"/>
+							<display value="Gene studied ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.genenames.org"/>
+							<code value="2623"/>
+							<display value="CYP2C9"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<derivedFrom>
+					<reference value="Observation/variant_1_pgx_example"/>
+				</derivedFrom>
+				<derivedFrom>
+					<reference value="Sequence/sequence_1_pgx_example"/>
+				</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype_2_pgx_example"/>
+  		<resource>
+  			<Observation xmlns="http:hl7.org/fhir">
+				<id value="haplotype_2_pgx_example"/>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/observation-category"/>
+						<code value="laboraory"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="84414-2"/>
+						<display value="Haplotype Name"/>
+					</coding>
+				</code>
+				<effectiveDateTime value="2018"/>
+				<issued value="2018-03-06T00:00:00-05:00"/>
+				<valueString value="*4"/>
+				<specimen>
+		          	<reference value="Specimen/specimen"/>
+		        </specimen>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48018-6"/>
+							<display value="Gene studied ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.genenames.org"/>
+							<code value="2623"/>
+							<display value="CYP2C9"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<derivedFrom>
+					<reference value="Observation/variant_2_pgx_example"/>
+				</derivedFrom>
+				<derivedFrom>
+					<reference value="Sequence/sequence_2_pgx_example"/>
+				</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant_1_pgx_example"/>
+  		<resource>
+  			<Observation>
+				<id value="variant_1_pgx_example"/>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/observation-category"/>
+						<code value="laboraory"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="69548-6"/>
+						<display value="Genetic variant assessment"/>
+					</coding>
+				</code>
+				<effectiveDateTime value="2018"/>
+				<issued value="2018-03-06T00:00:00-05:00"/>
+				<valueCodeableConcept>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="LA9633-4"/>
+						<display value="Present"/>
+					</coding>
+				</valueCodeableConcept>
+				<specimen>
+		          	<reference value="Specimen/specimen"/>
+		        </specimen>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48018-6"/>
+							<display value="Gene studied ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.genenames.org"/>
+							<code value="2623"/>
+							<display value="CYP2C9"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48013-7"/>
+							<display value="Genomic reference sequence ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
+							<code value="NG_007726.3"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="81255-2"/>
+							<display value="dbSNP ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="https://www.ncbi.nlm.nih.gov/SNP/"/>
+							<code value="rs12345"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<derivedFrom>
+					<reference value="Sequence/sequence_1_pgx_example"/>
+				</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant_2_pgx_example"/>
+  		<resource>
+  			<Observation>
+				<id value="variant_2_pgx_example"/>
+				<status value="final"/>
+				<category>
+					<coding>
+						<system value="http://hl7.org/fhir/observation-category"/>
+						<code value="laboraory"/>
+					</coding>
+				</category>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="69548-6"/>
+						<display value="Genetic variant assessment"/>
+					</coding>
+				</code>
+				<effectiveDateTime value="2018"/>
+				<issued value="2018-03-06T00:00:00-05:00"/>
+				<valueCodeableConcept>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="LA9633-4"/>
+						<display value="Present"/>
+					</coding>
+				</valueCodeableConcept>
+				<specimen>
+		          	<reference value="Specimen/specimen"/>
+		        </specimen>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48018-6"/>
+							<display value="Gene studied ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.genenames.org"/>
+							<code value="2623"/>
+							<display value="CYP2C9"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="48013-7"/>
+							<display value="Genomic reference sequence ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
+							<code value="NG_007726.3"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<component>
+					<code>
+						<coding>
+							<system value="http://loinc.org"/>
+							<code value="81255-2"/>
+							<display value="dbSNP ID"/>
+						</coding>
+					</code>
+					<valueCodeableConcept>
+						<coding>
+							<system value="https://www.ncbi.nlm.nih.gov/SNP/"/>
+							<code value="rs233455"/>
+						</coding>
+					</valueCodeableConcept>
+				</component>
+				<derivedFrom>
+					<reference value="Sequence/sequence_2_pgx_example"/>
+				</derivedFrom>
+			</Observation>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence_1_pgx_example"/>
+  		<resource>
+  			<Sequence>
+				<id value="sequence_1_pgx_example"/>
+				<coordinateSystem value="0"/>
+			    <referenceSeq>
+			        <orientation value="sense"/>
+			        <referenceSeqId>
+			          <coding>
+			            <system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
+			            <code value="NG_007726.3"/>
+			          </coding>
+			        </referenceSeqId>
+			        <windowStart value="55227970"/>
+			        <windowEnd value="55227980"/>
+			    </referenceSeq>
+			    <variant>
+			        <start value="55227976"/>
+			        <end value="55227977"/>
+			        <observedAllele value="G"/>
+			        <referenceAllele value="T"/>
+			    </variant>
+			</Sequence>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence_2_pgx_example"/>
+  		<resource>
+  			<Sequence>
+				<id value="sequence_2_pgx_example"/>
+				<coordinateSystem value="0"/>
+			    <referenceSeq>
+			        <orientation value="sense"/>
+			        <referenceSeqId>
+			          <coding>
+			            <system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
+			            <code value="NG_007726.3"/>
+			          </coding>
+			        </referenceSeqId>
+			        <windowStart value="55227970"/>
+			        <windowEnd value="55227980"/>
+			    </referenceSeq>
+			    <variant>
+			        <start value="55227978"/>
+			        <end value="55227979"/>
+			        <observedAllele value="G"/>
+			        <referenceAllele value="T"/>
+			    </variant>
+			</Sequence>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Task/med_usage_impact_task_pgx_example"/>
+  		<resource>
+  			<Task>
+				<id value="med_usage_impact_task_pgx_example"/>
+				<status value="draft"/>
+				<intent value="proposal"/>
+				<code>
+					<coding>
+						<system value="http://loinc.org"/>
+						<code value="LA26423-6"/>
+						<display value="Increase dose"/>
+					</coding>
+					<text value="Any Increase does Recommendation Text from the provider"/>
+				</code>
+				<description value="Any Increase does Recommendation Text from the provider"/>
+				<reasonReference>
+					<reference value="Observation/med_impact_pgx_example"/>
+				</reasonReference>
+				<reasonReference>
+					<reference value="Obervation/genotype_pgx_example"/>
+				</reasonReference>
+				<reasonReference>
+					<reference value="Observation/haplotype_1_pgx_example"/>
+				</reasonReference>
+				<reasonReference>
+					<reference value="Observation/haplotype_2_pgx_example"/>
+				</reasonReference>
+				<reasonReference>
+					<reference value="Observation/variant_1_pgx_example"/>
+				</reasonReference>
+				<reasonReference>
+					<reference value="Observation/variant_2_pgx_example"/>
+				</reasonReference>
+			</Task>
+  		</resource>
+  	</entry>
+  	<entry>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/MedicationStatement/current_med_example"/>
+  		<resource>
+  			<MedicationStatement>
+				<id value="current_med_example"/>
+				<status value="active"/>
+				<medicaitonCodeableConcept>
+					<coding>
+						<system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
+						<code value="103"/>
+						<display value="6-mercaptopurine"/>
+					</coding>
+				</medicaitonCodeableConcept>
+				<subject>
+					<reference value="Patient/example"/>
+				</subject>
+			</MedicationStatement>
+  		</resource>
+  	</entry>
+</Bundle>

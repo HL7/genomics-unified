@@ -167,6 +167,8 @@
     "StructureDefinition/device-comp-manufacturer":{
     },
     "Bundle/diagnosticreport-cgexample":{
+    },
+    "Bundle/diagnosticreport-pgxexample":{
     }
   }
 }
