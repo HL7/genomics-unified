@@ -3,7 +3,7 @@
     This section covers additional guidelines related to genetic assessments related to the matching of donor and recipient tissue for donation, including bone marrow, organ and other tissue donations.  In particular, it covers additional guidance related to reports dealing with HLA (Human Leukocyte Antigens) typing.
   </p>
   <p>
-    From the below image, HLA result profile in DiagnosticReport resource is used. The Genotype profile of Observation will be pointed by the DiagnosticReport.result. Haplotype profile will be used. Then, Sequence Resource with the exon sequence data will be pointed by the haolptype profile.
+    From the below image, HLA result profile in DiagnosticReport resource is used. The Genotype profile of Observation will be pointed by the DiagnosticReport.result. Haplotype profile will be used. Then, Sequence Resource with the exon sequence data will be pointed by the haplotype profile.
   </p>
   <img src="hla-relationship.png" alt="Diagram showing the hla report relationship"/>
   <a name="interpretations"> </a>

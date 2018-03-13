@@ -29,17 +29,17 @@
   <p>
     "Known" variations are often assigned codes and catalogued into terminologies.  This allows easy linking of knowledge to information found in a particular specimen.  Reports can simply specify the code and know that clinicians can look up relevant information associated with the code.  However, sometimes variations are detected that do not (yet) have a standardized code.  In these cases, a description of the variation and where it was located must be communicated.  Often, even when a code is known, the details about the location and type of change are communicated
   </p>
-  
+
   <a name="keyelements"> </a>
   <h2>Key Reporting Elements</h2>
   <p>
-    The focal element for genetic reporting is the DiagnosticReport resource.  It summarizes and packages all of the information found and 
+    The focal element for genetic reporting is the DiagnosticReport resource.  It summarizes and packages all of the information found and
   </p>
-  
+
   <a name="variant"> </a>
   <h2>Variant Reporting</h2>
   <p>
-    DNA differences are sometimes reported on the basis of cytogenic analysis - visually examining one or more chromosomes using high-powered magnification and various staining techniques to identify discrepancies.  Cytogenics cannot be applied to RNA or proteins because they do not fold in a manner that is amenable to visual inspection.
+    DNA differences are sometimes reported on the basis of cytogenetic analysis - visually examining one or more chromosomes using high-powered magnification and various staining techniques to identify discrepancies.  Cytogenetics cannot be applied to RNA or proteins because they do not fold in a manner that is amenable to visual inspection.
   </p>
   <p>
     DNA, RNA and amino acid sequences can all be examined through a variety of mechanisms.

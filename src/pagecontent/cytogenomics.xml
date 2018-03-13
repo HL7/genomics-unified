@@ -1,6 +1,6 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
   <p>
-    This section provides guidance on reporting the results of cytogenomic testing.  This refers to tests related to the optical analysis of a specimen's DNA.  This includes direct examination of chromosomes under high magnification and examining chromosomal bands using various staining techniques through to automated differential image analysis of DNA bound to flourescent markers.
+    This section provides guidance on reporting the results of cytogenetic testing.  This refers to tests related to the optical analysis of a specimen's DNA.  This includes direct examination of chromosomes under high magnification and examining chromosomal bands using various staining techniques through to automated differential image analysis of DNA bound to fluorescent markers.
   </p>
   <p>
     TODO

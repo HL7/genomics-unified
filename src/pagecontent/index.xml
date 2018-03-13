@@ -7,7 +7,7 @@
   <a name="scope"> </a>
   <h2>Scope</h2>
   <p>
-    Genomics is a rapidly evolving area of healthcare that involves complex data structures.  There is significant value in sharing this information in a way that is consistent, computable and that can accomodate onging evolution of medical science and practice.  The value comes from the ability to easily sort, filter and perform decision support on such information and the resulting improvements in care and reduction in costs such as the elimination of redundant testing.  This implementation guide tries to provide guidance that will enable improved interoperable and computable sharing of genetic testing results.
+    Genomics is a rapidly evolving area of healthcare that involves complex data structures.  There is significant value in sharing this information in a way that is consistent, computable and that can accommodate ongoing evolution of medical science and practice.  The value comes from the ability to easily sort, filter and perform decision support on such information and the resulting improvements in care and reduction in costs such as the elimination of redundant testing.  This implementation guide tries to provide guidance that will enable improved interoperable and computable sharing of genetic testing results.
   </p>
   <p>
     This guide covers all aspects of genetic reporting, including:
@@ -17,7 +17,7 @@
     <li>Representation of simple discrete variants, structural variants including copy number variants, complex variants as well as gross variations such as extra or missing chromosomes</li>
     <li>Representation of both known/catalogued variants as well as fully describing non-catalogued variations</li>
     <li>Germline and somatic variations</li>
-    <li>Relevance of identified variations from the perspective of disease pathology, pharmacogenoomics, transplant suitability (e.g. HLA typing), etc.</li>
+    <li>Relevance of identified variations from the perspective of disease pathology, pharmacogenomics, transplant suitability (e.g. HLA typing), etc.</li>
     <li>Full and partial DNA sequencing, including whole genome and exome studies</li>
     <li>Mosaicism (differing genetic characteristics for different specimens from the same subject)</li>
     <li>Mitochondrial DNA variations</li>
@@ -28,12 +28,12 @@
   <a name="principles"> </a>
   <h2>Guiding principles</h2>
   <p>
-    This guide adheres to a set of design approches:
+    This guide adheres to a set of design approaches:
   </p>
   <ul>
     <li>It is intended to be international in scope and only leverages terminologies which are freely available to all countries.</li>
     <li>It avoids pre-coordinating the type of variant, medication or other information into the Observation.code as this makes it easier to leverage industry standard terminologies for genetic information (e.g. HGVS) and avoids needing to duplicate this information into observation coding systems such as LOINC.</li>
-    <li>It maximizes the use of resources that are in common use by laboratory reporting systems for other clinical areas - specifically <a href="{{site.data.fhir.path}}/observation.html">Observation</a> and <a href="{{site.data.fhir.path}}/diagnosticreport.html">DiagnosticReport</a>.  This eases implementation and also reduces the chance of data being lost by systems that might not have been designed to specifically accomodate genetic-related information.</li>
+    <li>It maximizes the use of resources that are in common use by laboratory reporting systems for other clinical areas - specifically <a href="{{site.data.fhir.path}}/observation.html">Observation</a> and <a href="{{site.data.fhir.path}}/diagnosticreport.html">DiagnosticReport</a>.  This eases implementation and also reduces the chance of data being lost by systems that might not have been designed to specifically accommodate genetic-related information.</li>
     <li>It minimizes the use of FHIR extensions, also with an objective of reducing the risk of data loss when information is passed to systems that might not explicitly support this implementation guide</li>
     <li>It uses separate observations for each independently useful assertion.  This maximizes the discoverability and queriability of the data.</li>
     <li>It tries to ensure that data is captured in a manner that's consistent regardless of the type of testing that was done to ensure data can be consistently queried even if captured differently (e.g. variations identified in assay tests are reported in the same manner as those identified through direct sequencing)</li>
@@ -123,16 +123,16 @@
         <td>Additional guidance related to genetic testing done for transplant match assessments, including HLA typing</td>
       </tr>
       <tr>
+        <th><a href="usecases.html">HL7 Domain Analysis Use Cases</a></th>
+        <td>Some use cases on FHIR design: Specimen Identification, Clinical Sequencing and so on</td>
+      </tr>
+      <tr>
         <th><a href="v2.html">Appendix A: Relation to v2 reporting</a></th>
         <td>Guidance on how the guidance in this implementation guide aligns with reports expressed using HL7 v2 and advice on how to convert between the v2 and FHIR representations</td>
       </tr>
       <tr>
         <th><a href="cgapps.html">Appendix B: Clinical Genomics Apps</a></th>
         <td>Introduction of the Clinical Genomics Applications(Genomics Advisor, etc) apply for this implementation guide</td>
-      </tr>
-      <tr>
-        <th><a href="usecases.html">HL7 Domain Analysis Use Cases</a></th>
-        <td>Some use cases on FHIR design: Specimen Identification, Clinial Sequencing and so on</td>
       </tr>
     </tbody>
   </table>

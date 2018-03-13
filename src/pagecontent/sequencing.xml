@@ -12,7 +12,7 @@
   </ul>
   <img src="2-sequencing.png" alt="Diagram showing the sequencing profiles"/>
   <p>
-    Of these, the workhorse is <i>Described Variant</i>.  It provides the details of exactly what sort of change was found, where that change was found, the degree of certainy around the type and location of the change and other information.  It leverages the <i>Sequence</i> profile to convey information that would be part of a knowledge-base definition of the identified variant, but all information specific to the particular observed specimen is conveyed in the Described Variant profile.
+    Of these, the workhorse is <i>Described Variant</i>.  It provides the details of exactly what sort of change was found, where that change was found, the degree of certainty around the type and location of the change and other information.  It leverages the <i>Sequence</i> profile to convey information that would be part of a knowledge-base definition of the identified variant, but all information specific to the particular observed specimen is conveyed in the Described Variant profile.
   </p>
   <p>
     The <i>Complex Variant</i> profile is used when there is a need to represent a named grouping of variants that do not correspond to a single <a href="obs-genotype.html">Genotype</a> or <a href="obs-haplotype.html">Haplotype</a>.  The details of what was found are left to the member <i>Described Variants</i> the <i>Complex Variant</i> points to.
@@ -94,7 +94,7 @@
     Sequence.pointer: A bundle of Sequence instances can be connected by Sequence.pointer to build sequence graph described in Section 3. Sequence.pointer will point to the next sequence block.
   </p>
   <p>
-    Sequence.variant.variantPointer: A pointer to link the Observaiton(Variant) profile which store the associated interpretative variant information
+    Sequence.variant.variantPointer: A pointer to link the Observation(Variant) profile which store the associated interpretative variant information
   </p>
   <p><b>Pointer to Observation resource (based on genetics profile)</b></p>
   <p>
