@@ -3,17 +3,17 @@
 	<id value="diagnosticreport-pgxexample"/>
 	<type value="collection" />
 	<entry>
-		<fullUrl value="http://hl7.org/fhir/uv/cg/DiagnosticReport/pgx_report"/>
+		<fullUrl value="http://hl7.org/fhir/uv/cg/DiagnosticReport/pgx-report"/>
 		<resource>
 			<DiagnosticReport>
-				<id value="pgx_report"/>
+				<id value="pgx-report"/>
 				<extension url="http://hl7.org/fhir/uv/cg/StructureDefinition/dr-recommendedAction">
 					<valueReference>
-						<reference value="Task/med_usage_impact_task_pgx_example"/>
+						<reference value="Task/med-usage-impact-task-pgx-example"/>
 					</valueReference>
 				</extension>
 				<basedOn>
-					<reference value="ServiceRequest/pgx_reqeust"/>
+					<reference value="ServiceRequest/pgx-request"/>
 				</basedOn>
 				<status value="final"/>
 				<category>
@@ -38,23 +38,23 @@
         	<reference value="Organization/lab"/>
         </performer>
 				<result>
-					<reference value="Observation/med_impact_pgx_example"/>
+					<reference value="Observation/med-impact-pgx-example"/>
 					<display value="genetics impact for medication metabolism accessment"/>
 				</result>
 				<result>
-					<reference value="Obervation/genotype_pgx_example"/>
+					<reference value="Observation/genotype-pgx-example"/>
 				</result>
 				<result>
-					<reference value="Observation/haplotype_1_pgx_example"/>
+					<reference value="Observation/haplotype-1-pgx-example"/>
 				</result>
 				<result>
-					<reference value="Observation/haplotype_2_pgx_example"/>
+					<reference value="Observation/haplotype-2-pgx-example"/>
 				</result>
 				<result>
-					<reference value="Observation/variant_1_pgx_example"/>
+					<reference value="Observation/variant-1-pgx-example"/>
 				</result>
 				<result>
-					<reference value="Observation/variant_2_pgx_example"/>
+					<reference value="Observation/variant-2-pgx-example"/>
 				</result>
 			</DiagnosticReport>
 		</resource>
@@ -100,10 +100,10 @@
 	    </resource>
   	</entry>
   	<entry>
-	    <fullUrl value="http://hl7.org/fhir/uv/cg/ServiceRequest/pgx_request"/>
+	    <fullUrl value="http://hl7.org/fhir/uv/cg/ServiceRequest/pgx-request"/>
 	    <resource>
 			<ServiceRequest>
-				<id value="pgx_request"/>
+				<id value="pgx-request"/>
 				<text>
 					<status value="generated"/>
 				  	<div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -126,10 +126,10 @@
 	    </resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/med_impact_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/med-impact-pgx-example"/>
   		<resource>
   			<Observation>
-					<id value="med_impact_pgx_example"/>
+					<id value="med-impact-pgx-example"/>
 					<status value="final"/>
 					<code>
 						<coding>
@@ -173,21 +173,21 @@
 						</valueCodeableConcept>
 					</component>
 					<derivedFrom>
-						<reference value="Observation/genotype_pgx_example"/>
+						<reference value="Observation/genotype-pgx-example"/>
 					</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/genotype_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/genotype-pgx-example"/>
   		<resource>
   			<Observation>
-				<id value="genotype_pgx_example"/>
+				<id value="genotype-pgx-example"/>
 				<status value="final"/>
 				<category>
 					<coding>
 						<system value="http://hl7.org/fhir/observation-category"/>
-						<code value="laboraory"/>
+						<code value="laboratory"/>
 					</coding>
 				</category>
 				<code>
@@ -220,30 +220,30 @@
 					</valueCodeableConcept>
 				</component>
 				<derivedFrom>
-					<reference value="Observation/haplotype_1_pgx_example"/>
+					<reference value="Observation/haplotype-1-pgx-example"/>
 				</derivedFrom>
 				<derivedFrom>
-					<reference value="Observation/haplotype_2_pgx_example"/>
+					<reference value="Observation/haplotype-2-pgx-example"/>
 				</derivedFrom>
 				<derivedFrom>
-					<reference value="Sequence/sequence_1_pgx_example"/>
+					<reference value="Sequence/sequence-1-pgx-example"/>
 				</derivedFrom>
 				<derivedFrom>
-					<reference value="Sequence/sequence_2_pgx_example"/>
+					<reference value="Sequence/sequence-2-pgx-example"/>
 				</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype_1_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype-1-pgx-example"/>
   		<resource>
   			<Observation>
-				<id value="haplotype_1_pgx_example"/>
+				<id value="haplotype-1-pgx-example"/>
 				<status value="final"/>
 				<category>
 					<coding>
 						<system value="http://hl7.org/fhir/observation-category"/>
-						<code value="laboraory"/>
+						<code value="laboratory"/>
 					</coding>
 				</category>
 				<code>
@@ -276,19 +276,19 @@
 					</valueCodeableConcept>
 				</component>
 				<derivedFrom>
-					<reference value="Observation/variant_1_pgx_example"/>
+					<reference value="Observation/variant-1-pgx-example"/>
 				</derivedFrom>
 				<derivedFrom>
-					<reference value="Sequence/sequence_1_pgx_example"/>
+					<reference value="Sequence/sequence-1-pgx-example"/>
 				</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype_2_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/haplotype-2-pgx-example"/>
   		<resource>
   			<Observation xmlns="http:hl7.org/fhir">
-				<id value="haplotype_2_pgx_example"/>
+				<id value="haplotype-2-pgx-example"/>
 				<status value="final"/>
 				<category>
 					<coding>
@@ -326,24 +326,24 @@
 					</valueCodeableConcept>
 				</component>
 				<derivedFrom>
-					<reference value="Observation/variant_2_pgx_example"/>
+					<reference value="Observation/variant-2-pgx-example"/>
 				</derivedFrom>
 				<derivedFrom>
-					<reference value="Sequence/sequence_2_pgx_example"/>
+					<reference value="Sequence/sequence-2-pgx-example"/>
 				</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant_1_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant-1-pgx-example"/>
   		<resource>
   			<Observation>
-				<id value="variant_1_pgx_example"/>
+				<id value="variant-1-pgx-example"/>
 				<status value="final"/>
 				<category>
 					<coding>
 						<system value="http://hl7.org/fhir/observation-category"/>
-						<code value="laboraory"/>
+						<code value="laboratory"/>
 					</coding>
 				</category>
 				<code>
@@ -412,21 +412,21 @@
 					</valueCodeableConcept>
 				</component>
 				<derivedFrom>
-					<reference value="Sequence/sequence_1_pgx_example"/>
+					<reference value="Sequence/sequence-1-pgx-example"/>
 				</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant_2_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Observation/variant-2-pgx-example"/>
   		<resource>
   			<Observation>
-				<id value="variant_2_pgx_example"/>
+				<id value="variant-2-pgx-example"/>
 				<status value="final"/>
 				<category>
 					<coding>
 						<system value="http://hl7.org/fhir/observation-category"/>
-						<code value="laboraory"/>
+						<code value="laboratory"/>
 					</coding>
 				</category>
 				<code>
@@ -495,23 +495,23 @@
 					</valueCodeableConcept>
 				</component>
 				<derivedFrom>
-					<reference value="Sequence/sequence_2_pgx_example"/>
+					<reference value="Sequence/sequence-2-pgx-example"/>
 				</derivedFrom>
 			</Observation>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence_1_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence-1-pgx-example"/>
   		<resource>
   			<Sequence>
-				<id value="sequence_1_pgx_example"/>
+				<id value="sequence-1-pgx-example"/>
 				<coordinateSystem value="0"/>
 			    <referenceSeq>
 			        <orientation value="sense"/>
 			        <referenceSeqId>
 			          <coding>
 			            <system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
-			            <code value="NG_007726.3"/>
+			            <code value="NG-007726.3"/>
 			          </coding>
 			        </referenceSeqId>
 			        <windowStart value="55227970"/>
@@ -527,17 +527,17 @@
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence_2_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Sequence/sequence-2-pgx-example"/>
   		<resource>
   			<Sequence>
-				<id value="sequence_2_pgx_example"/>
+				<id value="sequence-2-pgx-example"/>
 				<coordinateSystem value="0"/>
 			    <referenceSeq>
 			        <orientation value="sense"/>
 			        <referenceSeqId>
 			          <coding>
 			            <system value="http://www.ncbi.nlm.nih.gov/nuccore"/>
-			            <code value="NG_007726.3"/>
+			            <code value="NG-007726.3"/>
 			          </coding>
 			        </referenceSeqId>
 			        <windowStart value="55227970"/>
@@ -553,10 +553,10 @@
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/Task/med_usage_impact_task_pgx_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/Task/med-usage-impact-task-pgx-example"/>
   		<resource>
   			<Task>
-				<id value="med_usage_impact_task_pgx_example"/>
+				<id value="med-usage-impact-task-pgx-example"/>
 				<status value="draft"/>
 				<intent value="proposal"/>
 				<code>
@@ -569,41 +569,41 @@
 				</code>
 				<description value="Any Increase does Recommendation Text from the provider"/>
 				<reasonReference>
-					<reference value="Observation/med_impact_pgx_example"/>
+					<reference value="Observation/med-impact-pgx-example"/>
 				</reasonReference>
 				<reasonReference>
-					<reference value="Obervation/genotype_pgx_example"/>
+					<reference value="Obervation/genotype-pgx-example"/>
 				</reasonReference>
 				<reasonReference>
-					<reference value="Observation/haplotype_1_pgx_example"/>
+					<reference value="Observation/haplotype-1-pgx-example"/>
 				</reasonReference>
 				<reasonReference>
-					<reference value="Observation/haplotype_2_pgx_example"/>
+					<reference value="Observation/haplotype-2-pgx-example"/>
 				</reasonReference>
 				<reasonReference>
-					<reference value="Observation/variant_1_pgx_example"/>
+					<reference value="Observation/variant-1-pgx-example"/>
 				</reasonReference>
 				<reasonReference>
-					<reference value="Observation/variant_2_pgx_example"/>
+					<reference value="Observation/variant-2-pgx-example"/>
 				</reasonReference>
 			</Task>
   		</resource>
   	</entry>
   	<entry>
-  		<fullUrl value="http://hl7.org/fhir/uv/cg/MedicationStatement/current_med_example"/>
+  		<fullUrl value="http://hl7.org/fhir/uv/cg/MedicationStatement/current-med-example"/>
   		<resource>
   			<MedicationStatement>
-				<id value="current_med_example"/>
+				<id value="current-med-example"/>
 				<status value="active"/>
-				<medicaitonCodeableConcept>
+				<medicationCodeableConcept>
 					<coding>
 						<system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
 						<code value="103"/>
 						<display value="6-mercaptopurine"/>
 					</coding>
-				</medicaitonCodeableConcept>
+				</medicationCodeableConcept>
 				<subject>
-					<reference value="Patient/example"/>
+					<reference value="Patient/patient"/>
 				</subject>
 			</MedicationStatement>
   		</resource>
