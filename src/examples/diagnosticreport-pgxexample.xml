@@ -293,7 +293,7 @@
 				<category>
 					<coding>
 						<system value="http://hl7.org/fhir/observation-category"/>
-						<code value="laboraory"/>
+						<code value="laboratory"/>
 					</coding>
 				</category>
 				<code>
@@ -570,21 +570,6 @@
 				<description value="Any Increase does Recommendation Text from the provider"/>
 				<reasonReference>
 					<reference value="Observation/med-impact-pgx-example"/>
-				</reasonReference>
-				<reasonReference>
-					<reference value="Obervation/genotype-pgx-example"/>
-				</reasonReference>
-				<reasonReference>
-					<reference value="Observation/haplotype-1-pgx-example"/>
-				</reasonReference>
-				<reasonReference>
-					<reference value="Observation/haplotype-2-pgx-example"/>
-				</reasonReference>
-				<reasonReference>
-					<reference value="Observation/variant-1-pgx-example"/>
-				</reasonReference>
-				<reasonReference>
-					<reference value="Observation/variant-2-pgx-example"/>
 				</reasonReference>
 			</Task>
   		</resource>
