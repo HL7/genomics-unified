@@ -3,6 +3,9 @@
     This section provides guidance for genomic reporting about the impact of a patient's or tumor's genetics on the behavior of one or more medications.  This includes making recommendations for medication adjustments.
   </p>
   <p>
+    The following link is the Pharmacogenomics example:
+  </p>
+  <p>
     <a href="diagnosticreport-pgxexample.html">PGx Example</a>: <a href="diagnosticreport-pgxexample.xml.html">XML</a>, <a href="diagnosticreport-pgxexample.json.html">JSON</a>
   </p>
   <img src="pgx-example-overall.png" alt="image to show the overall relationship between resources of pharmacogenomics example"/>
@@ -15,13 +18,87 @@
   <h2>Pharmacogenomic-specific Genetic Impacts</h2>
   <img src="pgx-example-genetic-impact.png" alt="image to show the genetic impact detail of the pharmacogenomics example"/>
   <p>
-    TODO
+    From the diagram above, Genotype Medication Metabolism Impact is used to store the phenotype detail of the which include the following fields:
+  </p>
+  <ul>
+    <li>code (LOINC|53040-2|Genetic variant effect on drug metabolism)</li>
+    <li>valueCodeableConept (etc:LOINC|LA25390-8|Rapid metabolizer)</li>
+    <li>derivedFrom(Observation/genotype)</li>
+    <li>component
+      <ul>
+        <li>code(LOINC|51963-7|medication assessed)</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    Medication Usage Impact is a Task resource, and it will store the specific recommendation of the specific phenotype which is stated on the Genotype Medication Metabolism Impact. Therefore, a reasonReference pointer will point to the Genotype Medication Metabolism Impact.
+  </p>
+  <p>
+    DiagnosticReport.result will be used to point to the Genotype Medication Metabolism Impact.
   </p>
   <a name="computable"> </a>
   <h2>Pharmacogenomic-specific Computable Genetic Findings</h2>
   <img src="pgx-example-genetic-finding.png" alt="image to show the genetic finding detail of the pharmacogenomics example"/>
   <p>
-    TODO
+    From the diagram above, Genotype, Haplotype and Variant profiles will are used. Each of the profile have the similar structure with Genetic Finding and Computable Finding, which means that Genotype, Haplotype and Variant profiles are inheriting the elements from Genetic Finding and Computable Finding.
+  </p>
+  <p>
+    Genotype contains the following fields:
+  </p>
+  <ul>
+    <li>code(LOINC|84413-4|Genotype display name)</li>
+    <li>valueString (etc:*4/*35B)</li>
+    <li>derivedFrom
+      <ul>
+        <li>Observation/Haplotype</li>
+        <li>Observation/Variant</li>
+        <li>Sequence/sequence</li>
+      </ul>
+    </li>
+    <li>component
+      <ul>
+        <li>code (LOINC|48018-6|Gene studies ID)</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    Haplotype contains the following fields:
+  </p>
+  <ul>
+    <li>code(LOINC|84414-2|Haplotype Name)</li>
+    <li>valueString (etc: *35B)</li>
+    <li>derivedFrom
+      <ul>
+        <li>Observation/Variant</li>
+        <li>Sequence/sequence</li>
+      </ul>
+    </li>
+    <li>component
+      <ul>
+        <li>code (LOINC|48018-6|Gene studied ID)</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    Variant contains the following fields:
+  </p>
+  <ul>
+    <li>code (LOINC|69548-6|genetic variant assessment)</li>
+    <li>valueCodeableConcept(etc: LOINC|LA9633-4|Present)</li>
+    <li>derivedFrom
+      <ul>
+        <li>Sequence/sequence</li>
+      </ul>
+    </li>
+    <li>component
+      <ul>
+        <li>code (LOINC|48013-7|Genomic reference sequence ID)</li>
+        <li>code (LOINC|81255-2|dbSNP ID)</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    DiagnosticReport is used to record all these genetic finding elements by using “result” pointer, and each of these genetics finding elements will have a pointer point to their corresponding sequences.
   </p>
   <a name="non-computable"> </a>
   <h2>Pharmacogenomic-specific Non-Computable Genetic Findings</h2>
@@ -31,6 +108,13 @@
   <a name="additional"> </a>
   <h2>Pharmacogenomic-specific Guidance and Recommendations</h2>
   <p>
-    TODO
+    <p>
+      Recommendation for the medication usage will be stored on Task resource. Within the overall diagram, it is called Medication Usage Impact. It contains the following fields:
+    </p>
+    <ul>
+      <li>code(etc: LOINC|LA26434-6|Increase does)</li>
+      <li>description(Any recommendation text for the medication usage suggestion)</li>
+      <li>reasonReference(Obseration/GenomicImpact)</li>
+    </ul>
   </p>
 </div>
