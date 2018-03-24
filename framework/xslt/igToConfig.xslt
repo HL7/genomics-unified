@@ -167,7 +167,7 @@
   "canonicalBase": "</xsl:text>
   <xsl:value-of select="substring-before(f:url/@value, '/ImplementationGuide')"/>
   <xsl:text>",&#xa;  </xsl:text>
-  <xsl:for-each select="f:dependency[f:type/@value='reference']/f:uri/@value">
+  <xsl:for-each select="f:dependency[f:type/@value='reference']/f:uri/@value|f:dependsOn/f:uri/@value">
     <xsl:variable name="code">
       <xsl:call-template name="findLast">
         <xsl:with-param name="string" select="."/>
@@ -181,19 +181,19 @@
   <xsl:value-of select="f:id/@value"/>
   <xsl:text>.xml",
   "spreadsheets": [</xsl:text>
-    <xsl:for-each select="f:package/f:extension[@url='http://hl7.org/fhir/tools-profile-spreadsheet']/f:valueUri/@value">
+    <xsl:for-each select="//f:extension[@url='http://hl7.org/fhir/tools-profile-spreadsheet']/f:valueUri/@value">
       <xsl:if test="position()!=1">,</xsl:if>
       <xsl:value-of select="concat('&#xa;    &quot;', ., '&quot;')"/>
     </xsl:for-each>
     <xsl:text>
   ],
   "resources": {</xsl:text>
-    <xsl:for-each select="f:package/f:resource">
-      <xsl:variable name="type" select="substring-before(f:sourceReference/f:reference/@value, '/')"/>
-      <xsl:variable name="id" select="substring-after(f:sourceReference/f:reference/@value, '/')"/>
+    <xsl:for-each select="f:package/f:resource|f:definition/f:resource">
+      <xsl:variable name="type" select="substring-before(*[self::f:reference or self::f:sourceReference]/f:reference/@value, '/')"/>
+      <xsl:variable name="id" select="substring-after(*[self::f:reference or self::f:sourceReference]/f:reference/@value, '/')"/>
       <xsl:if test="position()!=1">,</xsl:if>
-      <xsl:value-of select="concat('&#xa;    &quot;', f:sourceReference/f:reference/@value, '&quot;:{&#xa;')"/>
-      <xsl:if test="f:example/@value='true'">
+      <xsl:value-of select="concat('&#xa;    &quot;', *[self::f:reference or self::f:sourceReference]/f:reference/@value, '&quot;:{&#xa;')"/>
+      <xsl:if test="f:example/@value='true' or f:exampleBoolean/@value='true' or f:exampleReference">
         <xsl:choose>
           <xsl:when test="$type='ValueSet'">
             <xsl:text>    "template-base": "../framework/templates/template-instance-base.html",&#xa;</xsl:text>
@@ -215,7 +215,7 @@
           </xsl:when>
         </xsl:choose>
       </xsl:if>
-      <xsl:if test="not(f:example/@value='true') and (ancestor::f:ImplementationGuide//f:page[f:source/@value=concat('extension-', $id, '.html')] or starts-with($id, 'ext-')) and $type='StructureDefinition'">
+      <xsl:if test="not(f:example/@value='true' or f:exampleBoolean='true' or f:exampleFor) and (ancestor::f:ImplementationGuide//f:page[*[self::f:source or self::f:nameUrl]/@value=concat('extension-', $id, '.html')] or starts-with($id, 'ext-')) and $type='StructureDefinition'">
         <xsl:text>      "template-base": "../framework/templates/template-ext.html",&#xa;</xsl:text>
         <xsl:text>      "template-defns": "../framework/templates/template-ext-definitions.html",&#xa;</xsl:text>
         <xsl:text>      "template-mappings": "../framework/templates/template-ext-mappings.html",&#xa;</xsl:text>

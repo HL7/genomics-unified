@@ -120,8 +120,6 @@
     },
     "StructureDefinition/obs-chrom-overall":{
     },
-    "StructureDefinition/obs-inh-dis-path":{
-    },
     "StructureDefinition/obs-desc-gen-finding":{
     },
     "StructureDefinition/obs-comp-gen-finding":{
@@ -136,7 +134,21 @@
     },
     "StructureDefinition/obs-described-variant":{
     },
-    "StructureDefinition/obs-som-path":{
+    "StructureDefinition/obs-sequence-config":{
+    },
+    "StructureDefinition/obs-impact":{
+    },
+    "StructureDefinition/obs-inh-dis-path":{
+    },
+    "StructureDefinition/obs-chrom-g-band":{
+    },
+    "StructureDefinition/obs-chrom-fish":{
+    },
+    "StructureDefinition/obs-copy-num-chg":{
+    },
+    "StructureDefinition/device-micro-plat":{
+    },
+    "StructureDefinition/devicecomp-fish-probe":{
     },
     "StructureDefinition/obs-med-impact":{
     },
@@ -150,19 +162,25 @@
     },
     "StructureDefinition/medicationstatement":{
     },
-    "StructureDefinition/obs-chrom-g-band":{
+    "StructureDefinition/obs-som-impact":{
     },
-    "StructureDefinition/obs-chrom-fish":{
+    "StructureDefinition/obs-som-diagnostic":{
     },
-    "StructureDefinition/obs-copy-num-chg":{
+    "StructureDefinition/obs-som-prognostic":{
     },
-    "StructureDefinition/device-micro-plat":{
+    "StructureDefinition/obs-som-predictive":{
     },
-    "StructureDefinition/devicecomp-fish-probe":{
+    "StructureDefinition/dr-relatedArtifact":{
+    },
+    "StructureDefinition/dr-recommendedAction":{
+    },
+    "StructureDefinition/dr-supportingInfo":{
+    },
+    "StructureDefinition/obs-focus":{
     },
     "StructureDefinition/obs-recommendedAction":{
     },
-    "StructureDefinition/dr-recommendedAction":{
+    "StructureDefinition/obs-unsolicited":{
     },
     "StructureDefinition/device-comp-manufacturer":{
     },

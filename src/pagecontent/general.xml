@@ -38,6 +38,10 @@
   <p>
     As shown in the diagram above, all of the observations may hang directly off of the <a href="diagnosticreport.html">diagnostic report</a>  However, they can also be part of a <a href="obs-gen-panel.html">panel</a>.  In this version of the specification, no guidance is provided on when or if panels should be used.  This is left up to the discretion of the reporting lab.  Observations might be organized on the basis of subject, specimen, chromosome, gene, condition/disease, medication or other appropriate measure.  The recursive "hasMember" relationship on panel supports a nested tree-structure of panels if appropriate, though more than two levels of panels is likely excessive.
   </p>
+  <a name="lookedfor"> </a>
+  <blockquote class="stu-note">
+    <p>One area yet to be resolved is how to best capture "what was looked for" - i.e. the genes/diseases/medications/etc. that were evaluated as part of testing.  Because FHIR resources are intended to be stand-alone, any of this information that is relevant to a particular Observation needs to be conveyed as part of that Observation.  The work group is still considering how best to reflect this information in the model.</p>
+  </blockquote>
   <p>
     Any organization of observations into panels or sub-panels is purely for navigation and presentation purposes.  It carries no additional "meaning".  Each observation can be interpreted on its own without knowing the associated panel or sub-panel.  The organization of observations in panels does not assert any relationship between observations.
   </p>

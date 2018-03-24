@@ -43,6 +43,11 @@
   <p>
     Together, these principles should make adoption easier and allow systems to more easily adapt in a compatible way as genetic reporting continues to evolve.
   </p>
+  <a name="previous"> </a>
+  <h2>Previous Specifications</h2>
+  <p>
+    FHIR STU3 included a set of profiles that provided guidance on how to convey genetic orders, results and observations.  Those profiles are superceded by this implementation guide.  Guidance for converting from these older profiles is found <a href="conversion.html">here</a>.
+  </p>
   <a name="fhir"> </a>
   <h2>Understanding FHIR</h2>
   <p>
