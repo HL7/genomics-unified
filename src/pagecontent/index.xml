@@ -139,6 +139,10 @@
         <th><a href="cgapps.html">Appendix B: Clinical Genomics Apps</a></th>
         <td>Introduction of the Clinical Genomics Applications(Genomics Advisor, etc) apply for this implementation guide</td>
       </tr>
+      <tr>
+        <th><a href="domain.html">Appendix C: Domain Analysis Model</a></th>
+        <td>A domain analysis model for various use cases in clinical genomics with an emphasis on clinical sequencing</td>
+      </tr>
     </tbody>
   </table>
   <blockquote class="stu-note">
