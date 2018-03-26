@@ -495,6 +495,10 @@
         <nameUrl value="usecases.html"/>
         <title value="HL7 Domain Analysis Use Cases"/>
       </page>
+      <page>
+        <nameUrl value="domain.html"/>
+        <title value="Appendix C: Domain Analysis Model"/>
+      </page>
     </page>
   </definition>
 </ImplementationGuide>
