@@ -1,4 +1,5 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../src-generated/schemas/fhir-single.xsd">
+  <!--draft-->
   <a name="overview"> </a>
   <h2>Overview</h2>
   <p>
@@ -33,8 +34,11 @@
   <a name="keyelements"> </a>
   <h2>Key Reporting Elements</h2>
   <p>
-    The focal element for genetic reporting is the DiagnosticReport resource.  It summarizes and packages all of the information found and
+    The focal element for genetic reporting is the DiagnosticReport resource.  It summarizes and packages all of the information found, organizes it for consumption and provides a summary as well as a rendered view of the findings.  It is the primary response to the ServiceRequest which is the "order" for genetic testing to occur.  In practice, there can be multiple ServiceRequests grouped together as part of a single requisition.  This allows multiple tests to be ordered at one time and the results to be gathered as a group.  The organization of the report is accomplished by subsetting data into panels (and sometimes sub-panels).  The structure of these panels is usually driven by the types of testing requested, though they can vary depending on the reporting lab.  In some cases, no panel organization will be provided at all.
   </p>
+  <p>
+    TODO - continue this - findings, interpretations, impacts, recommendations
+  </p>  
 
   <a name="variant"> </a>
   <h2>Variant Reporting</h2>
@@ -43,5 +47,8 @@
   </p>
   <p>
     DNA, RNA and amino acid sequences can all be examined through a variety of mechanisms.
+  </p>
+  <p>
+    TODO - continue this - explain sequences and the different measurement parameters associated with them
   </p>
 </div>

@@ -18,6 +18,9 @@ New:
     <resource>
       <DiagnosticReport>
         <id value="report"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/diagnosticreport"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -141,6 +144,9 @@ New:
       <Specimen>
         <!-- This would contain details about the type of specimen, processing, etc. -->
         <id value="specimen"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/specimen"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -169,6 +175,9 @@ New:
     <resource>
       <ServiceRequest>
         <id value="request"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/servicerequest"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -197,6 +206,9 @@ New:
     <resource>
       <Observation>
         <id value="overall-interp"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-overall"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -240,6 +252,9 @@ New:
     <resource>
       <Observation>
         <id value="deletion-dup-overall"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-deletion-dup"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -273,7 +288,7 @@ New:
       </Observation>
     </resource>
   </entry>
-  <entry>
+<!--  <entry>
     <fullUrl value="http://hl7.org/fhir/uv/cg/Observation/negatives"/>
     <resource>
       <Observation>
@@ -315,7 +330,6 @@ New:
               <code value="51967-8"/>
             </coding>
           </code>
-          <!-- A.2 Genetic disease(s) assessed -->
           <valueCodeableConcept>
             <coding>
               <system value="http://snomed.info/sct"/>
@@ -331,10 +345,8 @@ New:
               <code value="51963-7"/>
             </coding>
           </code>
-          <!-- A.3 Medication(s) assessed -->
           <valueCodeableConcept>
             <coding>
-              <!-- A.3a We don't indicate the RxNorm subset - just RxNorm as a whole, because that's the code system -->
               <system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
               <code value="50005"/>
               <display value="Fluoxetine"/>
@@ -350,7 +362,6 @@ New:
           </code>
           <valueCodeableConcept>
             <coding>
-              <!-- A.3b -->
               <system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
               <code value="84701"/>
               <display value="Atorvastatin"/>
@@ -366,7 +377,6 @@ New:
           </code>
           <valueCodeableConcept>
             <coding>
-              <!-- A.3c -->
               <system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
               <code value="45000"/>
               <display value="Naproxen"/>
@@ -382,7 +392,6 @@ New:
           </code>
           <valueCodeableConcept>
             <coding>
-              <!-- A.3d -->
               <system value="http://www.nlm.nih.gov/research/umls/rxnorm"/>
               <code value="11289"/>
               <display value="Coumadin"/>
@@ -396,10 +405,8 @@ New:
               <code value="48018-6"/>
             </coding>
           </code>
-          <!-- A.4 Gene studied -->
           <valueCodeableConcept>
             <coding>
-              <!-- Need to define a URI for this -->
               <system value="http://example.org/hgnc-symb"/>
               <code value="21497"/>
               <display value="ACAD9"/>
@@ -413,13 +420,10 @@ New:
               <code value="36908-2"/>
             </coding>
           </code>
-          <!-- A.5 Gene mutations tested -->
           <valueCodeableConcept>
             <coding>
-              <!-- Need to define a URI for this -->
               <system value="http://example.org/clinvar"/>
               <version value="???"/>
-              <!-- A.16 ClinVar version -->
               <code value="7129"/>
               <display value="NM_000492.3(CFTR):c.3846G>A (p.Trp1282Ter)"/>
             </coding>
@@ -432,9 +436,6 @@ New:
               <code value="51959-5"/>
             </coding>
           </code>
-          <!-- A.6 Ranges of DNA sequence examined -->
-          <!-- CLEM: This seems like something that would need to be captured on a per-sequence basis - so how is this handled when reporting on analyses of multiple sequences? -->
-          <!-- CLEM: Presumably this needs to be present on each of the sequences where you're actually reporting results too, no? -->
           <valueRange>
             <low>
               <value value="2000753"/>
@@ -451,19 +452,19 @@ New:
               <code value="81293-3"/>
             </coding>
           </code>
-          <!-- A.7 Description of ranges of DNA sequences examined -->
-          <!-- CLEM: This seems like something that would need to be captured on a per-sequence basis - so how is this handled when reporting on analyses of multiple sequences? -->
-          <!-- CLEM: Presumably this needs to be present on each of the sequences where you're actually reporting results too, no? -->
           <valueString value="All coding regions and appropriate flanking regions"/>
         </component>
       </Observation>
     </resource>
-  </entry>
+  </entry>-->
   <entry>
     <fullUrl value="http://hl7.org/fhir/uv/cg/Observation/iscn"/>
     <resource>
       <Observation>
         <id value="iscn"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-cytogenic-not"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -509,6 +510,9 @@ New:
       <!-- Panel B -->
       <Observation>
         <id value="discrete-variant"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-described-variant"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1048,6 +1052,9 @@ New:
       <!-- This observation represents the sequence that was found (or not) -->
       <Observation>
         <id value="complex-variant"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-complex-variant"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1246,6 +1253,9 @@ New:
       <!-- Panel D -->
       <Observation>
         <id value="complex-component-D"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-described-variant"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1452,6 +1462,9 @@ New:
       <!-- Panel E -->
       <Observation>
         <id value="complex-component-E"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-described-variant"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1606,6 +1619,9 @@ New:
       <Observation>
         <!-- D Pharmacogenomics results panel -->
         <id value="pharmPanel"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-gen-panel"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1647,6 +1663,9 @@ New:
     <resource>
       <Observation>
         <id value="genotype"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-genotype"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1716,6 +1735,9 @@ New:
     <resource>
       <Observation>
         <id value="metab"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-metabolism"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1770,6 +1792,9 @@ New:
     <resource>
       <Observation>
         <id value="efficacy"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-efficacy"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1824,6 +1849,9 @@ New:
     <resource>
       <Observation>
         <id value="highrisk"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/obs-high-risk"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>
@@ -1879,6 +1907,9 @@ New:
       <Task>
         <!-- G1 -->
         <id value="usage"/>
+        <meta>
+          <profile value="http://hl7.org/fhir/uv/cg/StructureDefinition/task-med-chg"/>
+        </meta>
         <text>
           <status value="generated"/>
           <div xmlns="http://www.w3.org/1999/xhtml">TODO</div>

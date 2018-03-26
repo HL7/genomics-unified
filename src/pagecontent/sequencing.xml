@@ -17,18 +17,23 @@
   <p>
     The <i>Complex Variant</i> profile is used when there is a need to represent a named grouping of variants that do not correspond to a single <a href="obs-genotype.html">Genotype</a> or <a href="obs-haplotype.html">Haplotype</a>.  The details of what was found are left to the member <i>Described Variants</i> the <i>Complex Variant</i> points to.
   </p>
+  <p>
+    TODO - provide additional guidance on the content and use of these profiles
+  </p>
 
   <!--Sequence Resource Definition Section-->
-  <a name="sequence"> </a>
+<!--  
+  I've commented this out for now because a lot of it no longer applies.  Most elements of sequence aren't being used in the genetic reporting process because the group agreed to treat Sequence as a "definitional" resource and 
+<a name="sequence"> </a>
   <h2>Sequence Resource Usage Guide</h2>
   <p>
-    The Sequence resource is designed for next-generation sequencing data. Patients’ observed sequences should be represented by recording reference sequence id/string and detected variants. To specify how it proceed, here is a picture below:
+    The Sequence resource is designed for next-generation sequencing data. Patients' observed sequences should be represented by recording reference sequence id/string and detected variants. To specify how it proceed, here is a picture below:
   </p>
   <img src="sequence-outline.png" alt="image sequence layout"/>
   <a name="sequence-element"></a>
   <h3>Main Elements Definition</h3>
   <p>
-    Sequence.coordinateSystem: This element shall be constrained into only two possible values: 0 for 0-based system and 1 for 1-based system. Below is the picture that could explain what’s the difference between these two systems:
+    Sequence.coordinateSystem: This element shall be constrained into only two possible values: 0 for 0-based system and 1 for 1-based system. Below is the picture that could explain what's the difference between these two systems:
   </p>
   <img src="sequence-coordinate-sys.png" alt="image coordinate system description"/>
   <p>
@@ -115,5 +120,5 @@
   <p><b>Observation vs. Sequence</b></p>
   <p>
     Sequence is used for raw sequencing data while genetic-profile-based Observation resource is used for reporting interpretative genetic information (eg. DNA/amino acid variant detected in the patient). Although both Sequence and Observation-genetics profiles contain variant info, they are used differently: Sequence.variant is used for encoding the sequence block; the Observation-genetics profile is mainly used for a variants test result or interpretations of raw data in Sequence resource.
-  </p>
+  </p>-->
 </div>
